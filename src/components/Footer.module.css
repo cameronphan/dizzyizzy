@@ -6,12 +6,6 @@
   margin: 0 auto;
 }
 
-/* Make footer truly full width */
-:global(footer) {
-  background: var(--deep);
-  border-top: 1px solid var(--border);
-}
-
 .top {
   display: flex;
   align-items: center;
