@@ -45,7 +45,7 @@ export default function Contact() {
             {sent ? (
               <div className={s.success}>
                 <p className={s.successTitle}>Message received.</p>
-                <p className={s.successText}>{tab==='fan'?'Thanks for reaching out.':\"We'll be in touch shortly.\"}</p>
+                <p className={s.successText}>{tab==='fan'?'Thanks for reaching out.':"We'll be in touch shortly."}</p>
                 <button className={s.reset} onClick={() => setSent(false)}>Send another →</button>
               </div>
             ) : (
