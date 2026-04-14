@@ -2,7 +2,7 @@
 .hero {
   position: relative;
   min-height: 100vh;
-  padding-bottom: 120px;
+  padding-bottom: 240px;
   overflow: hidden;
   display: flex;
   align-items: flex-end;
@@ -261,7 +261,7 @@
 
 /* ── SECTIONS ─────────────────────────────────────── */
 .section {
-  padding: 88px 64px;
+  padding: 88px 64px 88px calc(var(--sidebar-w) + 48px);
   text-align: center;
 }
 
@@ -269,6 +269,72 @@
   text-align: left;
   margin-bottom: 0;
   min-height: 180px;
+}
+
+/* Force Ticket Tailor text readable on dark bg */
+.ticketWrap :global(.tt-widget),
+.ticketWrap :global(.tt-widget *) {
+  color: var(--cream) !important;
+  background: transparent !important;
+}
+.ticketWrap :global(a) { color: var(--purple) !important; }
+
+/* ── MERCH SCROLL ─────────────────────────────────── */
+.merchScroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  margin-bottom: 2rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--purple-dim) transparent;
+  -webkit-overflow-scrolling: touch;
+  justify-content: flex-start;
+  text-align: left;
+}
+.merchScroll::-webkit-scrollbar { height: 2px; }
+.merchScroll::-webkit-scrollbar-track { background: transparent; }
+.merchScroll::-webkit-scrollbar-thumb { background: var(--purple-dim); }
+
+.merchItem {
+  flex-shrink: 0;
+  width: 190px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border);
+  padding: 24px 16px 20px;
+  background: var(--surface);
+  transition: border-color 0.2s;
+  cursor: crosshair;
+}
+.merchItem:hover { border-color: rgba(155,109,255,0.4); }
+
+.merchShirt {
+  width: 100%;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.22;
+}
+
+.merchItemLabel {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--very-faint);
+  text-align: center;
+}
+
+.merchItemPrice {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--faint);
+  text-align: center;
 }
 
 /* ── PHOTO BREAK — full width ─────────────────────── */

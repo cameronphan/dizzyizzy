@@ -80,7 +80,6 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="purple-rule" />
       <Marquee />
 
       {/* ── 2. SHOWS ── */}
@@ -115,7 +114,26 @@ export default function Home() {
       <section className={s.section} id="merch">
         <span className="eyebrow">Shop</span>
         <h2 className="sec-title">Merch</h2>
-        <p className={s.comingSoon}>Coming Soon</p>
+        <div className={s.merchScroll}>
+          {[
+            { label: 'Classic Tee' },
+            { label: 'Dark Eyes Tee' },
+            { label: 'Hoodie' },
+            { label: 'Cap' },
+            { label: 'Tote Bag' },
+            { label: 'Long Sleeve' },
+          ].map((item, i) => (
+            <div key={i} className={s.merchItem}>
+              <div className={s.merchShirt}>
+                <svg viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 90, height: 90 }}>
+                  <path d="M30 5 L15 20 L0 15 L10 40 L20 40 L20 85 L80 85 L80 40 L90 40 L100 15 L85 20 L70 5 Q62 12 50 12 Q38 12 30 5Z" fill="rgba(237,232,245,1)" />
+                </svg>
+              </div>
+              <span className={s.merchItemLabel}>{item.label}</span>
+              <span className={s.merchItemPrice}>Coming Soon</span>
+            </div>
+          ))}
+        </div>
         <a href="https://www.instagram.com/justdizzyizzy" target="_blank" rel="noopener noreferrer" className={s.merchCta}>
           Follow for updates ↗
         </a>
