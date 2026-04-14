@@ -1,0 +1,37 @@
+.wrap {
+  overflow: hidden;
+  padding: 11px 0;
+  border-top: 1px solid rgba(155,109,255,0.2);
+  border-bottom: 1px solid rgba(155,109,255,0.2);
+  background: rgba(155,109,255,0.04);
+  white-space: nowrap;
+}
+
+.track {
+  display: inline-flex;
+  animation: marquee 22s linear infinite;
+}
+
+.track:hover {
+  animation-play-state: paused;
+}
+
+.item {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(237,232,245,0.5);
+  padding: 0 2.5rem;
+}
+
+.dot {
+  color: rgba(155,109,255,0.6);
+  margin-left: 0.5rem;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}

@@ -11,10 +11,10 @@ const nav = [
 ];
 
 const social = [
-  { href: 'https://open.spotify.com/artist/0zivcUeYnXj4nR0jl8735K',     icon: <SpotifyIcon />,     label: 'Spotify'     },
-  { href: 'https://music.apple.com/us/artist/dizzy-izzy/1853730221',     icon: <AppleMusicIcon />,  label: 'Apple Music' },
-  { href: 'https://www.instagram.com/justdizzyizzy',                     icon: <InstagramIcon />,   label: 'Instagram'   },
-  { href: 'https://www.youtube.com/@music.cameronphan',                  icon: <YoutubeIcon />,     label: 'YouTube'     },
+  { href: 'https://open.spotify.com/artist/0zivcUeYnXj4nR0jl8735K',    icon: <SpotifyIcon />,    label: 'Spotify'     },
+  { href: 'https://music.apple.com/us/artist/dizzy-izzy/1853730221',    icon: <AppleMusicIcon />, label: 'Apple Music' },
+  { href: 'https://www.instagram.com/justdizzyizzy',                    icon: <InstagramIcon />,  label: 'Instagram'   },
+  { href: 'https://www.youtube.com/@music.cameronphan',                 icon: <YoutubeIcon />,    label: 'YouTube'     },
 ];
 
 export default function Sidebar() {
@@ -22,10 +22,13 @@ export default function Sidebar() {
 
   return (
     <aside className={s.sidebar}>
+      {/* Logo — wordmark with purple left border accent */}
       <Link href="/" className={s.logo}>
-        Dizzy<br />Izzy
+        <span className={s.logoAccent} />
+        <span className={s.logoText}>Dizzy<br />Izzy</span>
       </Link>
 
+      {/* Nav — dash slides in on hover */}
       <nav className={s.nav}>
         {nav.map(l => (
           <Link
@@ -33,21 +36,17 @@ export default function Sidebar() {
             href={l.href}
             className={`${s.link} ${path === l.href ? s.active : ''}`}
           >
-            {l.label}
+            <span className={s.dash}>—</span>
+            <span>{l.label}</span>
           </Link>
         ))}
       </nav>
 
+      {/* Platform icons — large, icon only */}
       <div className={s.icons}>
         {social.map(x => (
-          <a
-            key={x.href}
-            href={x.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={s.icon}
-            aria-label={x.label}
-          >
+          <a key={x.href} href={x.href} target="_blank"
+             rel="noopener noreferrer" className={s.icon} aria-label={x.label}>
             {x.icon}
           </a>
         ))}

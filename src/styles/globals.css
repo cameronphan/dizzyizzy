@@ -1,29 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@300;400;700&family=Inter:wght@300;400;500&display=swap');
 
 :root {
-  --black:      #06050a;
-  --deep:       #08060f;
-  --surface:    #0c0914;
-  --border:     rgba(255,255,255,0.06);
-  --border-hi:  rgba(255,255,255,0.12);
-  --purple:     #9b6dff;
-  --purple-dim: #5c3fa8;
-  --cream:      #ede8f5;
-  --muted:      rgba(237,232,245,0.45);
-  --faint:      rgba(237,232,245,0.2);
-  --very-faint: rgba(237,232,245,0.08);
-  --font-poster: 'Anton', sans-serif;
-  --font-mono:   'Space Mono', monospace;
-  --sidebar-w:   160px;
+  --bg:          #08050e;
+  --surface:     #0d0a18;
+  --border:      rgba(255,255,255,0.06);
+  --border-hi:   rgba(255,255,255,0.12);
+  --purple:      #9b6dff;
+  --purple-dim:  #5c3fa8;
+  --purple-faint:rgba(155,109,255,0.15);
+  --cream:       #ede8f5;
+  --muted:       rgba(237,232,245,0.48);
+  --faint:       rgba(237,232,245,0.22);
+  --very-faint:  rgba(237,232,245,0.08);
+  --font-display:'IBM Plex Sans Condensed', sans-serif;
+  --font-body:   'Inter', sans-serif;
+  --sidebar-w:   168px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
 body {
-  background: #08050e;
+  background: var(--bg);
   color: var(--cream);
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 13px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -32,15 +32,15 @@ body {
 
 a { color: inherit; text-decoration: none; cursor: crosshair; }
 img { max-width: 100%; display: block; }
-button { font-family: var(--font-mono); cursor: crosshair; }
+button { font-family: var(--font-body); cursor: crosshair; }
 input { cursor: crosshair; }
 
-::selection { background: var(--purple); color: var(--black); }
+::selection { background: var(--purple); color: var(--bg); }
 ::-webkit-scrollbar { width: 2px; }
-::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--purple-dim); }
 
-/* GRAIN — heavy filmic grain */
+/* GRAIN — heavy, filmic, screen blend */
 body::after {
   content: '';
   position: fixed;
@@ -52,34 +52,75 @@ body::after {
   mix-blend-mode: screen;
 }
 
-/* EYEBROW */
+/* TYPOGRAPHY */
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
 .eyebrow {
   display: block;
+  font-family: var(--font-body);
   font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 0.32em;
+  font-weight: 500;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--purple);
   margin-bottom: 12px;
 }
 
-/* SECTION TITLE */
 .sec-title {
-  font-family: var(--font-poster);
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: clamp(3.5rem, 8vw, 6rem);
   text-transform: uppercase;
   color: var(--cream);
   line-height: 0.88;
   margin-bottom: 2.5rem;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
 }
 
-/* MAIN CONTENT OFFSET */
-.main-content {
-  padding-left: var(--sidebar-w);
+/* PURPLE RULE */
+.purple-rule {
+  height: 1px;
+  background: rgba(155,109,255,0.2);
+  margin: 0;
 }
 
-/* SECTION PADDING */
+/* LAYOUT */
+.site-wrap {
+  display: flex;
+  align-items: flex-start;
+}
+
+.main-col {
+  flex: 1;
+  min-width: 0;
+}
+
+/* SECTION */
 .section {
-  padding: 80px 60px 80px 60px;
+  padding: 88px 64px;
+  text-align: center;
+  position: relative;
+}
+
+/* ANIMATED PULSE */
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50%       { opacity: 1;   transform: scale(1.1); }
+}
+
+/* MARQUEE */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* FADE UP */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

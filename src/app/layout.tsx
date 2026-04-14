@@ -20,12 +20,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <MobileNav />
-        <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-          <Sidebar />
-          <main style={{ flex: 1, minWidth: 0 }}>
-            {children}
-          </main>
-        </div>
+        <Sidebar />
+        {/* Offset main content by sidebar width on desktop */}
+        <main style={{
+          marginLeft: 'var(--sidebar-w)',
+        }}>
+          {children}
+        </main>
       </body>
     </html>
   );

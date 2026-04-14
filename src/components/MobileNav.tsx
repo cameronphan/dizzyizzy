@@ -5,21 +5,21 @@ import { SpotifyIcon, AppleMusicIcon, InstagramIcon, YoutubeIcon } from './Icons
 import s from './MobileNav.module.css';
 
 const nav = [
-  { href: '/#shows', label: 'Shows' },
-  { href: '/#merch', label: 'Merch' },
-  { href: '/about',  label: 'About' },
+  { href: '/#shows', label: 'Shows'  },
+  { href: '/#merch', label: 'Merch'  },
+  { href: '/about',  label: 'About'  },
+  { href: '/contact',label: 'Contact'},
 ];
 
 const social = [
-  { href: 'https://open.spotify.com/artist/0zivcUeYnXj4nR0jl8735K', icon: <SpotifyIcon />,    label: 'Spotify'     },
-  { href: 'https://music.apple.com/us/artist/dizzy-izzy/1853730221', icon: <AppleMusicIcon />, label: 'Apple Music' },
-  { href: 'https://www.instagram.com/justdizzyizzy',                 icon: <InstagramIcon />,  label: 'Instagram'   },
-  { href: 'https://www.youtube.com/@music.cameronphan',              icon: <YoutubeIcon />,    label: 'YouTube'     },
+  { href: 'https://open.spotify.com/artist/0zivcUeYnXj4nR0jl8735K',    icon: <SpotifyIcon />,    label: 'Spotify'     },
+  { href: 'https://music.apple.com/us/artist/dizzy-izzy/1853730221',    icon: <AppleMusicIcon />, label: 'Apple Music' },
+  { href: 'https://www.instagram.com/justdizzyizzy',                    icon: <InstagramIcon />,  label: 'Instagram'   },
+  { href: 'https://www.youtube.com/@music.cameronphan',                 icon: <YoutubeIcon />,    label: 'YouTube'     },
 ];
 
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
-
   return (
     <div className={s.wrap}>
       <div className={s.bar}>
@@ -33,16 +33,11 @@ export default function MobileNav() {
       {open && (
         <div className={s.menu}>
           {nav.map(l => (
-            <Link key={l.href} href={l.href} className={s.link} onClick={() => setOpen(false)}>
-              {l.label}
-            </Link>
+            <Link key={l.href} href={l.href} className={s.link} onClick={() => setOpen(false)}>{l.label}</Link>
           ))}
           <div className={s.icons}>
             {social.map(x => (
-              <a key={x.href} href={x.href} target="_blank" rel="noopener noreferrer"
-                 className={s.icon} aria-label={x.label}>
-                {x.icon}
-              </a>
+              <a key={x.href} href={x.href} target="_blank" rel="noopener noreferrer" className={s.icon} aria-label={x.label}>{x.icon}</a>
             ))}
           </div>
         </div>

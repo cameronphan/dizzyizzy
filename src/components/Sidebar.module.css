@@ -1,29 +1,58 @@
 .sidebar {
-  position: sticky;
+  position: fixed;
+  left: 0;
   top: 0;
-  height: 100vh;
+  bottom: 0;
   width: var(--sidebar-w);
-  flex-shrink: 0;
+  z-index: 50;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 36px 0 36px 32px;
-  z-index: 50;
-  pointer-events: all;
+  padding: 36px 0 36px 28px;
   background: transparent;
+  pointer-events: all;
 }
 
+/* LOGO — wordmark with purple left border */
 .logo {
-  font-family: var(--font-poster);
-  font-size: 20px;
-  letter-spacing: 0.06em;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logoAccent {
+  display: block;
+  width: 2px;
+  height: 100%;
+  min-height: 42px;
+  background: var(--purple);
+  flex-shrink: 0;
+  margin-top: 2px;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.logo:hover .logoAccent {
+  opacity: 1;
+}
+
+.logoText {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--cream);
-  line-height: 1.1;
+  line-height: 1.15;
   transition: color 0.2s;
 }
-.logo:hover { color: var(--purple); }
 
+.logo:hover .logoText {
+  color: var(--purple);
+}
+
+/* NAV — dash slides in from left on hover */
 .nav {
   display: flex;
   flex-direction: column;
@@ -31,18 +60,45 @@
 }
 
 .link {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--faint);
-  padding: 7px 0;
+  padding: 6px 0;
   transition: color 0.2s;
-  display: block;
+  overflow: hidden;
 }
-.link:hover { color: var(--cream); }
-.link.active { color: var(--cream); }
 
+.dash {
+  display: inline-block;
+  color: var(--purple);
+  font-size: 14px;
+  margin-right: 0;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-width 0.25s ease, opacity 0.25s ease, margin-right 0.25s ease;
+  white-space: nowrap;
+}
+
+.link:hover .dash,
+.link.active .dash {
+  max-width: 24px;
+  opacity: 1;
+  margin-right: 6px;
+}
+
+.link:hover,
+.link.active {
+  color: var(--cream);
+}
+
+/* ICONS */
 .icons {
   display: flex;
   flex-direction: column;
@@ -51,16 +107,13 @@
 
 .icon {
   display: block;
-  color: rgba(237, 232, 245, 0.28);
+  color: var(--faint);
   transition: color 0.2s;
   width: 26px;
   height: 26px;
 }
 .icon:hover { color: var(--purple); }
-.icon svg {
-  width: 26px;
-  height: 26px;
-}
+.icon svg { width: 26px; height: 26px; }
 
 @media (max-width: 768px) {
   .sidebar { display: none; }

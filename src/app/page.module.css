@@ -1,61 +1,71 @@
 /* ── HERO ─────────────────────────────────────────── */
 .hero {
   position: relative;
+  min-height: 100vh;
   height: 100vh;
-  min-height: 600px;
   overflow: hidden;
+  display: flex;
+  align-items: flex-end;
 }
 
 .heroBg {
   object-fit: cover;
-  object-position: center 20%;
-  filter: brightness(0.55) saturate(0.8);
+  object-position: center 15%;
+  filter: brightness(0.58) saturate(0.8);
 }
 
+/* Subtle purple color grade */
+.heroColorGrade {
+  position: absolute;
+  inset: 0;
+  background: rgba(60, 20, 120, 0.12);
+  mix-blend-mode: color;
+  pointer-events: none;
+}
+
+/* Vignette only fades at very bottom — photo breathes */
 .heroVignette {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to top, rgba(8,5,14,0.97) 0%, rgba(8,5,14,0.5) 18%, transparent 45%),
-    linear-gradient(to right, rgba(8,5,14,0.25) 0%, transparent 40%);
+    linear-gradient(to top, rgba(8,5,14,0.97) 0%, rgba(8,5,14,0.4) 14%, transparent 35%),
+    linear-gradient(to right, rgba(8,5,14,0.2) 0%, transparent 30%);
+  pointer-events: none;
 }
 
-.heroContent {
+/* TITLE — stacked, DIZZY solid, IZZY outline offset right */
+.heroTitle {
   position: absolute;
-  inset: 0;
+  bottom: 44px;
+  left: 44px;
   z-index: 2;
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: 0 48px 48px 48px;
+  flex-direction: column;
+  line-height: 0.82;
+  animation: fadeUp 0.9s ease both;
 }
 
-/* Massive title */
-.heroTitle { flex-shrink: 0; }
-
 .t1 {
-  font-family: var(--font-poster);
-  font-size: clamp(6rem, 18vw, 16rem);
-  line-height: 0.82;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(5.5rem, 17vw, 15rem);
   text-transform: uppercase;
   color: var(--cream);
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 160px rgba(155,109,255,0.22);
   display: block;
-  letter-spacing: 0.01em;
-  animation: fadeUp 0.9s ease both;
-  text-shadow: 0 0 140px rgba(155,109,255,0.2);
 }
 
 .t2 {
-  font-family: var(--font-poster);
-  font-size: clamp(6rem, 18vw, 16rem);
-  line-height: 0.82;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(5.5rem, 17vw, 15rem);
   text-transform: uppercase;
   color: transparent;
   -webkit-text-stroke: 1.5px var(--purple);
+  letter-spacing: -0.01em;
   display: block;
-  letter-spacing: 0.01em;
-  margin-left: clamp(0.5rem, 2vw, 2rem);
-  animation: fadeUp 0.9s 0.1s ease both;
+  margin-left: clamp(1rem, 4vw, 4rem);
 }
 
 @keyframes fadeUp {
@@ -63,92 +73,117 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Dark Eyes release card */
-.releaseCard {
+/* RELEASE — raw, no card or border */
+.release {
+  position: absolute;
+  bottom: 52px;
+  right: 52px;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 10px;
-  animation: fadeUp 0.9s 0.2s ease both;
+  gap: 8px;
+  animation: fadeUp 0.9s 0.15s ease both;
 }
 
 .releaseLabel {
+  font-family: var(--font-body);
   font-size: 7px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--faint);
 }
 
-.releaseInner {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  background: rgba(8,5,14,0.55);
-  border: 1px solid var(--border-hi);
-  padding: 16px 20px;
-  backdrop-filter: blur(12px);
-  transition: border-color 0.2s;
-}
-.releaseInner:hover { border-color: var(--purple); }
-
-.releaseCover {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-.releaseInfo {
+.releaseLink {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  align-items: flex-end;
+  gap: 6px;
+  transition: opacity 0.2s;
+}
+.releaseLink:hover { opacity: 0.82; }
+
+.releaseCover {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  display: block;
 }
 
 .releaseTrack {
-  font-family: var(--font-poster);
-  font-size: 28px;
-  letter-spacing: 0.04em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--cream);
-  line-height: 1;
+  text-align: right;
+  display: block;
 }
 
 .releaseArtist {
-  font-size: 9px;
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 400;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--faint);
+  text-align: right;
+  display: block;
 }
 
 .releaseListen {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  font-family: var(--font-body);
   font-size: 9px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--purple);
-  margin-top: 6px;
+}
+
+/* ANIMATED PULSE */
+.pulse {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.dot1, .dot2, .dot3 {
   display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--purple);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+.dot2 { animation-delay: 0.2s; }
+.dot3 { animation-delay: 0.4s; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.7); }
+  50%       { opacity: 1;   transform: scale(1.2); }
 }
 
 /* ── SECTIONS ─────────────────────────────────────── */
 .section {
-  padding: 80px 60px;
+  padding: 88px 64px;
   text-align: center;
-}
-
-/* Override centering for ticket widget and booking note */
-.ticketWrap,
-.bookNote {
-  text-align: left;
+  position: relative;
 }
 
 .ticketWrap {
+  text-align: left;
   margin-bottom: 2rem;
-  min-height: 200px;
+  min-height: 180px;
 }
 
 .bookNote {
+  text-align: left;
   font-size: 9px;
   color: var(--very-faint);
   letter-spacing: 0.08em;
@@ -160,10 +195,10 @@
 }
 .bookLink:hover { opacity: 0.6; }
 
-/* ── WIDE PHOTO BREAK ─────────────────────────────── */
+/* ── PHOTO BREAK ──────────────────────────────────── */
 .photoBreak {
   position: relative;
-  height: 380px;
+  height: 420px;
   overflow: hidden;
 }
 
@@ -177,44 +212,38 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to bottom, rgba(8,5,14,0.7) 0%, transparent 25%, transparent 75%, rgba(8,5,14,0.7) 100%);
+    linear-gradient(to bottom, rgba(8,5,14,0.65) 0%, transparent 25%, transparent 75%, rgba(8,5,14,0.65) 100%);
 }
 
 /* ── MERCH ────────────────────────────────────────── */
-.merchPlaceholder {
-  border: 1px solid var(--border);
-  background: var(--surface);
-  padding: 5rem 3rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.merchPlaceholderText {
+.comingSoon {
+  font-family: var(--font-body);
   font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.25em;
+  font-weight: 500;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--very-faint);
+  margin-bottom: 1.5rem;
 }
 
 .merchCta {
-  font-size: 9px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--purple);
   transition: opacity 0.2s;
+  display: inline-block;
 }
 .merchCta:hover { opacity: 0.6; }
 
-/* ── EMAIL SECTION ────────────────────────────────── */
+/* ── EMAIL ────────────────────────────────────────── */
 .emailSection {
   position: relative;
-  padding: 100px 60px;
+  padding: 100px 64px;
   overflow: hidden;
+  text-align: center;
 }
 
 .emailGallery {
@@ -233,58 +262,52 @@
 .emailGalleryImg {
   object-fit: cover;
   object-position: center top;
-  filter: brightness(0.3) saturate(0.6);
+  filter: brightness(0.28) saturate(0.55);
 }
 
 .emailOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(8, 5, 14, 0.45);
+  background: rgba(8,5,14,0.5);
 }
 
 .emailContent {
   position: relative;
   z-index: 2;
-  max-width: 560px;
-  text-align: center;
+  max-width: 520px;
   margin: 0 auto;
 }
 
-.emailFormWrap { margin-top: 4px; display: flex; flex-direction: column; align-items: center; }
-
 .emailInputWrap {
   display: flex;
+  max-width: 400px;
+  margin: 0 auto;
   cursor: not-allowed;
-  width: 100%;
-  max-width: 420px;
 }
 
 .emailInput {
   flex: 1;
   padding: 13px 16px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255,255,255,0.04);
   border: 1px solid var(--border-hi);
   border-right: none;
   color: var(--faint);
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: 11px;
   outline: none;
   cursor: not-allowed;
-  opacity: 0.6;
-}
-
-.emailInput::placeholder {
-  color: var(--faint);
   font-style: italic;
 }
+
+.emailInput::placeholder { color: var(--faint); }
 
 .emailBtn {
   padding: 13px 22px;
   background: var(--purple-dim);
-  color: rgba(237, 232, 245, 0.4);
-  font-family: var(--font-mono);
+  color: rgba(237,232,245,0.35);
+  font-family: var(--font-body);
   font-size: 8px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   border: none;
@@ -297,27 +320,48 @@
   font-size: 8px;
   color: var(--very-faint);
   letter-spacing: 0.06em;
-  margin-top: 10px;
+  margin-top: 12px;
 }
+
+/* ── FOOTER — one line ────────────────────────────── */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 64px;
+  border-top: 1px solid rgba(155,109,255,0.2);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--very-faint);
+}
+
+.footerRule {
+  flex: 1;
+  height: 1px;
+  background: rgba(155,109,255,0.15);
+  margin: 0 2rem;
+}
+
+.footerContact {
+  color: var(--purple);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+.footerContact:hover { opacity: 0.6; }
 
 /* ── RESPONSIVE ───────────────────────────────────── */
 @media (max-width: 768px) {
-  .heroContent { padding: 0 24px 40px 24px; flex-direction: column; align-items: flex-start; gap: 2rem; }
-  .releaseCard { align-items: flex-start; }
-  .section { padding: 60px 24px; }
+  .heroTitle { left: 24px; bottom: 32px; }
+  .release { right: 24px; bottom: 32px; }
+  .releaseCover { width: 80px; height: 80px; }
+  .releaseTrack { font-size: 16px; }
+  .section { padding: 64px 24px; }
   .emailSection { padding: 80px 24px; }
   .emailGallery { grid-template-columns: repeat(2, 1fr); }
-}
-
-/* ── SHOWS BACKGROUND ─────────────────────────────── */
-.showsBg {
-  object-fit: cover;
-  object-position: center top;
-  filter: brightness(0.07) saturate(0.5);
-}
-
-.showsBgOverlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(8, 5, 14, 0.7);
+  .footer { padding: 20px 24px; }
 }
