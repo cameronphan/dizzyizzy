@@ -5,11 +5,12 @@
   overflow: hidden;
   display: flex;
   align-items: flex-end;
+  /* Full width — bleeds behind transparent sidebar */
+  width: 100%;
 }
 
 .heroBg {
   object-fit: cover;
-  object-position: center 15%;
   object-position: 50% 10%;
   filter: brightness(0.58) saturate(0.8);
 }
@@ -27,8 +28,7 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to top, rgba(8,5,14,0.98) 0%, rgba(8,5,14,0.35) 12%, transparent 30%),
-    linear-gradient(to right, rgba(8,5,14,0.15) 0%, transparent 25%);
+    linear-gradient(to top, rgba(8,5,14,0.98) 0%, rgba(8,5,14,0.35) 12%, transparent 30%);
   pointer-events: none;
 }
 
@@ -36,7 +36,8 @@
 .heroTitle {
   position: absolute;
   bottom: 44px;
-  left: 44px;
+  /* Offset right of sidebar */
+  left: calc(var(--sidebar-w) + 32px);
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -63,14 +64,13 @@
   margin-left: clamp(1rem, 4vw, 4rem);
 }
 
-/* Layer 1 — cyan tint, offset left, pulses */
+/* Layer 1 — cycles cyan→green→yellow, offset left */
 .izzy1 {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(5.5rem, 17vw, 15rem);
   text-transform: uppercase;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(0,255,255,0.55);
   letter-spacing: -0.01em;
   position: absolute;
   top: 0; left: 0;
@@ -78,14 +78,13 @@
   pointer-events: none;
 }
 
-/* Layer 2 — magenta/red tint, offset right, opposite phase */
+/* Layer 2 — cycles magenta→red→orange, offset right */
 .izzy2 {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(5.5rem, 17vw, 15rem);
   text-transform: uppercase;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(200,0,255,0.45);
   letter-spacing: -0.01em;
   position: absolute;
   top: 0; left: 0;
@@ -93,7 +92,7 @@
   pointer-events: none;
 }
 
-/* Layer 3 — main purple outline, pulses between outline and solid */
+/* Layer 3 — main, cycles purple→white→neon green→purple */
 .izzy3 {
   font-family: var(--font-display);
   font-weight: 700;
@@ -106,31 +105,33 @@
 }
 
 @keyframes vhs1 {
-  0%   { transform: translateX(-3px); opacity: 0.4; }
-  20%  { transform: translateX(-5px) translateY(1px); opacity: 0.7; }
-  40%  { transform: translateX(-2px); opacity: 0.3; }
-  60%  { transform: translateX(-6px) translateY(-1px); opacity: 0.6; }
-  80%  { transform: translateX(-3px); opacity: 0.4; }
-  100% { transform: translateX(-3px); opacity: 0.4; }
+  0%   { -webkit-text-stroke: 1px rgba(0,255,255,0.6);   transform: translateX(-4px); opacity: 0.5; }
+  20%  { -webkit-text-stroke: 1px rgba(0,255,120,0.65);  transform: translateX(-6px) translateY(1px); opacity: 0.7; }
+  40%  { -webkit-text-stroke: 1px rgba(255,255,0,0.5);   transform: translateX(-3px); opacity: 0.4; }
+  60%  { -webkit-text-stroke: 1px rgba(0,200,255,0.6);   transform: translateX(-7px) translateY(-1px); opacity: 0.65; }
+  80%  { -webkit-text-stroke: 1px rgba(100,255,200,0.5); transform: translateX(-4px); opacity: 0.5; }
+  100% { -webkit-text-stroke: 1px rgba(0,255,255,0.6);   transform: translateX(-4px); opacity: 0.5; }
 }
 
 @keyframes vhs2 {
-  0%   { transform: translateX(3px); opacity: 0.35; }
-  20%  { transform: translateX(2px) translateY(-1px); opacity: 0.5; }
-  40%  { transform: translateX(5px); opacity: 0.6; }
-  60%  { transform: translateX(2px) translateY(1px); opacity: 0.35; }
-  80%  { transform: translateX(4px); opacity: 0.5; }
-  100% { transform: translateX(3px); opacity: 0.35; }
+  0%   { -webkit-text-stroke: 1px rgba(255,0,200,0.5);   transform: translateX(4px); opacity: 0.4; }
+  20%  { -webkit-text-stroke: 1px rgba(255,50,50,0.55);  transform: translateX(3px) translateY(-1px); opacity: 0.55; }
+  40%  { -webkit-text-stroke: 1px rgba(255,100,0,0.5);   transform: translateX(6px); opacity: 0.6; }
+  60%  { -webkit-text-stroke: 1px rgba(200,0,255,0.55);  transform: translateX(3px) translateY(1px); opacity: 0.4; }
+  80%  { -webkit-text-stroke: 1px rgba(255,0,150,0.5);   transform: translateX(5px); opacity: 0.5; }
+  100% { -webkit-text-stroke: 1px rgba(255,0,200,0.5);   transform: translateX(4px); opacity: 0.4; }
 }
 
 @keyframes vhsMain {
-  0%   { color: transparent; -webkit-text-stroke: 1.5px var(--purple); opacity: 1; }
-  15%  { color: rgba(237,232,245,0.85); -webkit-text-stroke: 1.5px var(--purple); opacity: 1; }
-  30%  { color: transparent; -webkit-text-stroke: 1.5px var(--purple); opacity: 0.9; }
-  45%  { color: rgba(155,109,255,0.6); -webkit-text-stroke: 1.5px var(--purple); opacity: 1; }
-  65%  { color: transparent; -webkit-text-stroke: 1.5px rgba(237,232,245,0.8); opacity: 0.95; }
-  80%  { color: transparent; -webkit-text-stroke: 1.5px var(--purple); opacity: 1; }
-  100% { color: transparent; -webkit-text-stroke: 1.5px var(--purple); opacity: 1; }
+  0%   { color: transparent;               -webkit-text-stroke: 1.5px #9b6dff; }
+  12%  { color: rgba(237,232,245,0.9);     -webkit-text-stroke: 1.5px #9b6dff; }
+  24%  { color: transparent;               -webkit-text-stroke: 1.5px #00ffcc; }
+  36%  { color: rgba(155,109,255,0.7);     -webkit-text-stroke: 1.5px #ff00cc; }
+  48%  { color: transparent;               -webkit-text-stroke: 1.5px #ffff00; }
+  60%  { color: rgba(0,255,200,0.6);       -webkit-text-stroke: 1.5px #ff3300; }
+  72%  { color: transparent;               -webkit-text-stroke: 1.5px #cc00ff; }
+  84%  { color: rgba(255,200,255,0.5);     -webkit-text-stroke: 1.5px #00ccff; }
+  100% { color: transparent;               -webkit-text-stroke: 1.5px #9b6dff; }
 }
 
 @keyframes fadeUp {
@@ -168,8 +169,8 @@
 }
 
 .releaseCover {
-  width: 130px;
-  height: 130px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
   display: block;
   transition: opacity 0.2s;
@@ -179,7 +180,7 @@
 .releaseTrack {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 24px;
+  font-size: 28px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--cream);
@@ -270,11 +271,12 @@
   min-height: 180px;
 }
 
-/* ── PHOTO BREAK ──────────────────────────────────── */
+/* ── PHOTO BREAK — full width ─────────────────────── */
 .photoBreak {
   position: relative;
   height: 420px;
   overflow: hidden;
+  width: 100%;
 }
 
 .photoBreakImg {
@@ -313,7 +315,7 @@
 /* ── EMAIL ────────────────────────────────────────── */
 .emailSection {
   position: relative;
-  padding: 100px 64px;
+  padding: 100px 64px 100px calc(var(--sidebar-w) + 48px);
   overflow: hidden;
   text-align: center;
 }
@@ -396,7 +398,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 64px;
+  padding: 20px 64px 20px calc(var(--sidebar-w) + 48px);
   border-top: 1px solid rgba(155,109,255,0.2);
   font-size: 9px;
   font-weight: 500;

@@ -21,10 +21,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <MobileNav />
         <Sidebar />
-        {/* Offset main content by sidebar width on desktop */}
-        <main style={{
-          marginLeft: 'var(--sidebar-w)',
-        }}>
+        {/*
+          Main content starts at 0 — images go full width behind sidebar.
+          Sections that need text offset use padding-left via .section class.
+        */}
+        <main>
           {children}
         </main>
       </body>

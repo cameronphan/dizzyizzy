@@ -100,9 +100,9 @@ body::after {
   min-width: 0;
 }
 
-/* SECTION */
+/* SECTION — left padding accounts for fixed sidebar */
 .section {
-  padding: 88px 64px;
+  padding: 88px 64px 88px calc(var(--sidebar-w) + 48px);
   text-align: center;
   position: relative;
 }
