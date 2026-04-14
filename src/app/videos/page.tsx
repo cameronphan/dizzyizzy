@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 // To add new videos: add an object to this array with the YouTube video ID
 // You can find the video ID in the YouTube URL after "watch?v="
 // Example: https://www.youtube.com/watch?v=ABC123 → id: 'ABC123'
-const videos = [
+const videos: { id: string; title: string; category: string }[] = [
   // Placeholder — replace with real video IDs when available
   // { id: 'YOUR_VIDEO_ID', title: 'Video Title', category: 'Music Video' },
 ];
