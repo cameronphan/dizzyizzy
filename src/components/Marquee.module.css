@@ -5,8 +5,8 @@
   border-bottom: 1px solid rgba(155,109,255,0.2);
   background: rgba(155,109,255,0.04);
   white-space: nowrap;
-  margin-top: 96px;
-  margin-bottom: 48px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .track {
