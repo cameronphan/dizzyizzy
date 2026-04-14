@@ -1,120 +1,82 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import {
-  SpotifyIcon,
-  AppleMusicIcon,
-  YoutubeMusicIcon,
-  InstagramIcon,
-  YoutubeIcon,
-} from './Icons';
-import styles from './Navbar.module.css';
+import { SpotifyIcon, AppleMusicIcon, YoutubeMusicIcon, YoutubeIcon, InstagramIcon } from './Icons';
+import s from './Navbar.module.css';
 
-const navLinks = [
+const nav = [
   { href: '/shows',   label: 'Shows'   },
   { href: '/music',   label: 'Music'   },
-  { href: '/videos',  label: 'Videos'  },
   { href: '/merch',   label: 'Merch'   },
   { href: '/about',   label: 'About'   },
-  { href: '/contact', label: 'Contact' },
 ];
 
-const socialLinks = [
-  { href: 'https://open.spotify.com/artist/0zivcUeYnXj4nR0jl8735K', icon: <SpotifyIcon />,      label: 'Spotify'       },
-  { href: 'https://music.apple.com/us/artist/dizzy-izzy/1853730221', icon: <AppleMusicIcon />,   label: 'Apple Music'   },
-  { href: 'https://music.youtube.com/channel/UCw8RIQdp_79fxJoYzrkic0A', icon: <YoutubeMusicIcon />, label: 'YouTube Music' },
-  { href: 'https://www.youtube.com/@music.cameronphan',               icon: <YoutubeIcon />,      label: 'YouTube'       },
-  { href: 'https://www.instagram.com/justdizzyizzy',                  icon: <InstagramIcon />,    label: 'Instagram'     },
+const social = [
+  { href: 'https://open.spotify.com/artist/0zivcUeYnXj4nR0jl8735K',      icon: <SpotifyIcon />,        label: 'Spotify'       },
+  { href: 'https://music.apple.com/us/artist/dizzy-izzy/1853730221',      icon: <AppleMusicIcon />,     label: 'Apple Music'   },
+  { href: 'https://music.youtube.com/channel/UCw8RIQdp_79fxJoYzrkic0A',  icon: <YoutubeMusicIcon />,   label: 'YouTube Music' },
+  { href: 'https://www.youtube.com/@music.cameronphan',                   icon: <YoutubeIcon />,        label: 'YouTube'       },
+  { href: 'https://www.instagram.com/justdizzyizzy',                      icon: <InstagramIcon />,      label: 'Instagram'     },
 ];
 
 export default function Navbar() {
-  const pathname = usePathname();
+  const path = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    const fn = () => setScrolled(window.scrollY > 30);
+    window.addEventListener('scroll', fn);
+    return () => window.removeEventListener('scroll', fn);
   }, []);
 
-  useEffect(() => { setOpen(false); }, [pathname]);
+  useEffect(() => setOpen(false), [path]);
 
   return (
     <>
-      <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
-        {/* Logo */}
-        <Link href="/" className={styles.logo}>
-          Dizzy<br />Izzy
-        </Link>
+      <nav className={`${s.nav} ${scrolled ? s.scrolled : ''}`}>
+        <Link href="/" className={s.logo}>Dizzy Izzy</Link>
 
-        {/* Center nav links */}
-        <ul className={styles.links}>
-          {navLinks.map((l) => (
+        <ul className={s.links}>
+          {nav.map(l => (
             <li key={l.href}>
-              <Link
-                href={l.href}
-                className={`${styles.link} ${pathname === l.href ? styles.active : ''}`}
-              >
+              <Link href={l.href} className={`${s.link} ${path === l.href ? s.active : ''}`}>
                 {l.label}
               </Link>
             </li>
           ))}
         </ul>
 
-        {/* Right: platform icons */}
-        <div className={styles.icons}>
-          {socialLinks.map((s) => (
-            <a
-              key={s.href}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="platform-icon"
-              aria-label={s.label}
-            >
-              {s.icon}
+        <div className={s.right}>
+          {social.map(s2 => (
+            <a key={s2.href} href={s2.href} target="_blank" rel="noopener noreferrer"
+               className="icon-btn" aria-label={s2.label}>
+              {s2.icon}
             </a>
           ))}
         </div>
 
-        {/* Mobile hamburger */}
-        <button
-          className={styles.burger}
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          <span className={`${styles.b} ${open ? styles.b1open : ''}`} />
-          <span className={`${styles.b} ${open ? styles.b2open : ''}`} />
-          <span className={`${styles.b} ${open ? styles.b3open : ''}`} />
+        <button className={s.burger} onClick={() => setOpen(!open)} aria-label="Menu">
+          <span className={`${s.b} ${open ? s.b1 : ''}`} />
+          <span className={`${s.b} ${open ? s.b2 : ''}`} />
+          <span className={`${s.b} ${open ? s.b3 : ''}`} />
         </button>
       </nav>
 
-      {/* Mobile menu */}
       {open && (
-        <div className={styles.mobile}>
-          {navLinks.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={`${styles.mobileLink} ${pathname === l.href ? styles.active : ''}`}
-            >
+        <div className={s.mobile}>
+          {nav.map(l => (
+            <Link key={l.href} href={l.href}
+              className={`${s.mLink} ${path === l.href ? s.active : ''}`}>
               {l.label}
             </Link>
           ))}
-          <div className={styles.mobileIcons}>
-            {socialLinks.map((s) => (
-              <a
-                key={s.href}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="platform-icon"
-                aria-label={s.label}
-              >
-                {s.icon}
+          <div className={s.mIcons}>
+            {social.map(s2 => (
+              <a key={s2.href} href={s2.href} target="_blank" rel="noopener noreferrer"
+                 className="icon-btn" aria-label={s2.label}>
+                {s2.icon}
               </a>
             ))}
           </div>
