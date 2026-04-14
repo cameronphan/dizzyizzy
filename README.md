@@ -1,256 +1,83 @@
-'use client';
+# Dizzy Izzy — Official Website
 
-import { useState } from 'react';
-import styles from './page.module.css';
+Built with Next.js 14, hosted on Vercel.
 
-type FormType = 'fan' | 'booking';
+## Stack
+- **Framework**: Next.js 14 (App Router)
+- **Hosting**: Vercel
+- **Domain**: Cloudflare
+- **Tickets**: Ticket Tailor (embedded)
+- **Forms**: Formspree (requires setup — see below)
 
-interface FormState {
-  name: string;
-  email: string;
-  message: string;
-  // booking-only fields
-  venue?: string;
-  date?: string;
-  type?: string;
-}
+---
 
-const emptyForm: FormState = {
-  name: '',
-  email: '',
-  message: '',
-  venue: '',
-  date: '',
-  type: '',
-};
+## How to make edits
 
-export default function ContactPage() {
-  const [activeForm, setActiveForm] = useState<FormType>('fan');
-  const [form, setForm] = useState<FormState>(emptyForm);
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+All content is in the `src/app/` folder. Each page has its own folder:
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+| Page | File to edit |
+|------|-------------|
+| Home | `src/app/page.tsx` |
+| Shows | `src/app/shows/page.tsx` |
+| Music | `src/app/music/page.tsx` |
+| Videos | `src/app/videos/page.tsx` |
+| Merch | `src/app/merch/page.tsx` |
+| About | `src/app/about/page.tsx` |
+| Contact | `src/app/contact/page.tsx` |
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+After editing any file and pushing to GitHub, Vercel automatically rebuilds and deploys the site within ~30 seconds.
 
-    // Using Formspree for form handling — no backend needed
-    // To activate: go to formspree.io, create a free account, create a form,
-    // and replace 'YOUR_FORM_ID' below with your actual form ID
-    try {
-      const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, formType: activeForm }),
-      });
+---
 
-      if (res.ok) {
-        setSubmitted(true);
-        setForm(emptyForm);
-      }
-    } catch {
-      // Form submission failed silently — show success anyway for UX
-      // We'll improve error handling when Formspree is connected
-      setSubmitted(true);
-    } finally {
-      setLoading(false);
-    }
-  };
+## Adding photos
 
-  return (
-    <div className="container">
-      <div className={styles.header}>
-        <p className="section-label">Get in Touch</p>
-        <h1 className="section-title">Contact</h1>
-      </div>
+1. Add image files to the `/public/images/` folder in GitHub
+2. Reference them in your pages as `/images/your-photo.jpg`
 
-      <div className={styles.layout}>
-        <div className={styles.left}>
-          {/* Form type toggle */}
-          <div className={styles.toggle}>
-            <button
-              className={`${styles.toggleBtn} ${activeForm === 'fan' ? styles.toggleActive : ''}`}
-              onClick={() => { setActiveForm('fan'); setSubmitted(false); }}
-            >
-              Fan Mail
-            </button>
-            <button
-              className={`${styles.toggleBtn} ${activeForm === 'booking' ? styles.toggleActive : ''}`}
-              onClick={() => { setActiveForm('booking'); setSubmitted(false); }}
-            >
-              Booking &amp; Press
-            </button>
-          </div>
+---
 
-          {submitted ? (
-            <div className={styles.successMsg}>
-              <p className={styles.successTitle}>Message received.</p>
-              <p className={styles.successText}>
-                {activeForm === 'fan'
-                  ? "Thanks for reaching out — it means the world."
-                  : "Thanks for your inquiry. We'll be in touch shortly."}
-              </p>
-              <button
-                className={styles.resetBtn}
-                onClick={() => setSubmitted(false)}
-              >
-                Send another →
-              </button>
-            </div>
-          ) : (
-            <form className={styles.form} onSubmit={handleSubmit}>
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="name">Name</label>
-                <input
-                  className={styles.input}
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  value={form.name}
-                  onChange={handleChange}
-                  placeholder="Your name"
-                />
-              </div>
+## Adding videos (Videos page)
 
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="email">Email</label>
-                <input
-                  className={styles.input}
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  value={form.email}
-                  onChange={handleChange}
-                  placeholder="your@email.com"
-                />
-              </div>
+Open `src/app/videos/page.tsx` and add to the `videos` array:
 
-              {activeForm === 'booking' && (
-                <>
-                  <div className={styles.field}>
-                    <label className={styles.label} htmlFor="venue">Venue / Organization</label>
-                    <input
-                      className={styles.input}
-                      id="venue"
-                      name="venue"
-                      type="text"
-                      value={form.venue}
-                      onChange={handleChange}
-                      placeholder="Venue or organization name"
-                    />
-                  </div>
+```js
+const videos = [
+  { id: 'YOUR_YOUTUBE_VIDEO_ID', title: 'Video Title', category: 'Music Video' },
+];
+```
 
-                  <div className={styles.fieldRow}>
-                    <div className={styles.field}>
-                      <label className={styles.label} htmlFor="date">Proposed Date</label>
-                      <input
-                        className={styles.input}
-                        id="date"
-                        name="date"
-                        type="date"
-                        value={form.date}
-                        onChange={handleChange}
-                      />
-                    </div>
-                    <div className={styles.field}>
-                      <label className={styles.label} htmlFor="type">Inquiry Type</label>
-                      <select
-                        className={styles.input}
-                        id="type"
-                        name="type"
-                        value={form.type}
-                        onChange={handleChange}
-                      >
-                        <option value="">Select type</option>
-                        <option value="booking">Booking / Show</option>
-                        <option value="press">Press / Interview</option>
-                        <option value="collaboration">Collaboration</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-                  </div>
-                </>
-              )}
+The video ID is the part after `watch?v=` in a YouTube URL.
 
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="message">Message</label>
-                <textarea
-                  className={styles.textarea}
-                  id="message"
-                  name="message"
-                  required
-                  value={form.message}
-                  onChange={handleChange}
-                  rows={6}
-                  placeholder={
-                    activeForm === 'fan'
-                      ? "Say hello..."
-                      : "Tell us about the show, event, or opportunity..."
-                  }
-                />
-              </div>
+---
 
-              <button
-                type="submit"
-                className={styles.submitBtn}
-                disabled={loading}
-              >
-                {loading ? 'Sending...' : 'Send Message'}
-              </button>
+## Setting up the contact form (Formspree)
 
-              <p className={styles.formNote}>
-                ⚠️ Form delivery requires Formspree setup — see developer notes in contact/page.tsx
-              </p>
-            </form>
-          )}
-        </div>
+1. Go to [formspree.io](https://formspree.io) and create a free account
+2. Create a new form
+3. Copy your form ID (looks like `xpzgkrqb`)
+4. Open `src/app/contact/page.tsx`
+5. Find `YOUR_FORM_ID` and replace it with your actual ID
+6. Push to GitHub — forms will now deliver to your email
 
-        <div className={styles.right}>
-          <div className={styles.infoBlock}>
-            <p className={styles.infoLabel}>Follow</p>
-            <div className={styles.infoLinks}>
-              <a href="https://www.instagram.com/justdizzyizzy" target="_blank" rel="noopener noreferrer" className={styles.infoLink}>
-                Instagram — @justdizzyizzy
-              </a>
-              <a href="https://www.youtube.com/@music.cameronphan" target="_blank" rel="noopener noreferrer" className={styles.infoLink}>
-                YouTube
-              </a>
-            </div>
-          </div>
+---
 
-          <div className={styles.infoBlock}>
-            <p className={styles.infoLabel}>Stream</p>
-            <div className={styles.infoLinks}>
-              <a href="https://open.spotify.com/artist/0zivcUeYnXj4nR0jl8735K" target="_blank" rel="noopener noreferrer" className={styles.infoLink}>
-                Spotify
-              </a>
-              <a href="https://music.apple.com/us/artist/dizzy-izzy/1853730221" target="_blank" rel="noopener noreferrer" className={styles.infoLink}>
-                Apple Music
-              </a>
-              <a href="https://music.youtube.com/channel/UCw8RIQdp_79fxJoYzrkic0A" target="_blank" rel="noopener noreferrer" className={styles.infoLink}>
-                YouTube Music
-              </a>
-            </div>
-          </div>
+## Setting up merch (Printful)
 
-          <div className={styles.infoBlock}>
-            <p className={styles.infoLabel}>Shows</p>
-            <div className={styles.infoLinks}>
-              <a href="/shows" className={styles.infoLink}>
-                View upcoming shows →
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+1. Set up your store on [printful.com](https://printful.com)
+2. Get your embed code from Printful
+3. Open `src/app/merch/page.tsx`
+4. Replace the placeholder section with your embed code
+
+---
+
+## Colors & fonts
+
+All design tokens are in `src/styles/globals.css` under `:root { }`.
+
+Main colors:
+- `--accent-gold: #d4a843` — primary accent
+- `--accent-rust: #c4522a` — secondary accent
+- `--bg-primary: #0e0d0b` — main background
+- `--text-primary: #f0e6cc` — main text
+
+Fonts: Bebas Neue (display), DM Serif Display (serif), DM Sans (body)
