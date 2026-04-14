@@ -1,136 +1,128 @@
 .nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   z-index: 100;
-  transition: background 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 72px;
+  transition: background 0.3s, border-color 0.3s;
   border-bottom: 1px solid transparent;
 }
 
 .nav.scrolled {
-  background: rgba(14, 13, 11, 0.92);
-  backdrop-filter: blur(12px);
+  background: rgba(6, 5, 15, 0.92);
+  backdrop-filter: blur(16px);
   border-bottom-color: var(--border);
 }
 
-.inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
+/* Logo — big stacked poster type */
 .logo {
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  letter-spacing: 0.08em;
-  color: var(--text-primary);
+  font-family: var(--font-poster);
+  font-size: 1.35rem;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cream);
   transition: color 0.2s;
+  flex-shrink: 0;
 }
+.logo:hover { color: var(--purple); }
 
-.logo:hover {
-  color: var(--accent-gold);
-}
-
+/* Center nav */
 .links {
   display: flex;
-  align-items: center;
-  gap: 2.5rem;
   list-style: none;
+  gap: 2.5rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .link {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--text-secondary);
+  color: var(--very-muted);
   transition: color 0.2s;
   position: relative;
 }
-
 .link::after {
   content: '';
   position: absolute;
-  bottom: -4px;
+  bottom: -3px;
   left: 0;
   width: 0;
   height: 1px;
-  background: var(--accent-gold);
-  transition: width 0.3s ease;
+  background: var(--purple);
+  transition: width 0.25s ease;
 }
-
-.link:hover {
-  color: var(--text-primary);
-}
-
+.link:hover { color: var(--cream); }
 .link:hover::after,
-.link.active::after {
-  width: 100%;
+.link.active::after { width: 100%; }
+.link.active { color: var(--purple); }
+
+/* Right icons */
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  flex-shrink: 0;
 }
 
-.link.active {
-  color: var(--accent-gold);
-}
-
-.menuBtn {
+/* Mobile */
+.burger {
   display: none;
   flex-direction: column;
   gap: 5px;
   background: none;
   border: none;
-  cursor: pointer;
   padding: 4px;
 }
-
-.bar {
+.b {
   display: block;
-  width: 24px;
-  height: 1.5px;
-  background: var(--text-primary);
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  width: 22px;
+  height: 1px;
+  background: var(--cream);
+  transition: transform 0.25s, opacity 0.25s;
 }
+.b1open { transform: translateY(6px) rotate(45deg); }
+.b2open { opacity: 0; }
+.b3open { transform: translateY(-6px) rotate(-45deg); }
 
-.open1 { transform: translateY(6.5px) rotate(45deg); }
-.open2 { opacity: 0; }
-.open3 { transform: translateY(-6.5px) rotate(-45deg); }
-
-.mobileMenu {
+.mobile {
+  position: fixed;
+  top: 72px; left: 0; right: 0;
+  background: var(--deep);
+  border-bottom: 1px solid var(--border);
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  background: var(--bg-secondary);
-  border-top: 1px solid var(--border);
-  padding: 1.5rem 2rem;
-  gap: 0;
+  z-index: 99;
 }
-
 .mobileLink {
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--text-secondary);
+  color: var(--muted);
   padding: 1rem 0;
   border-bottom: 1px solid var(--border);
   transition: color 0.2s;
 }
-
-.mobileLink:last-child {
-  border-bottom: none;
+.mobileLink.active,
+.mobileLink:hover { color: var(--purple); }
+.mobileIcons {
+  display: flex;
+  gap: 0.5rem;
+  padding-top: 1.5rem;
 }
 
-.mobileLink:hover,
-.mobileLink.active {
-  color: var(--accent-gold);
-}
-
-@media (max-width: 768px) {
+@media (max-width: 860px) {
   .links { display: none; }
-  .menuBtn { display: flex; }
+  .icons { display: none; }
+  .burger { display: flex; }
 }

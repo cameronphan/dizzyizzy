@@ -1,64 +1,64 @@
+.page { max-width: 1140px; margin: 0 auto; padding: 0 2rem 6rem; }
+
 .header {
-  padding: 4rem 0 3rem;
+  padding: 5rem 0 4rem;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 }
 
-.subtitle {
-  color: var(--text-secondary);
-  font-size: 1rem;
-  margin-top: 1rem;
+.title {
+  font-family: var(--font-poster);
+  font-size: clamp(5rem, 15vw, 12rem);
+  text-transform: uppercase;
+  color: var(--cream);
+  line-height: 0.85;
+  margin-bottom: 1.5rem;
 }
 
-.storePlaceholder {
+.sub { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; }
+
+.placeholder {
   border: 1px solid var(--border);
-  background: var(--bg-card);
+  background: var(--surface);
   padding: 8rem 2rem;
   text-align: center;
-  margin-bottom: 5rem;
 }
 
-.placeholderLabel {
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.25em;
+.csLabel {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--accent-gold);
-  margin-bottom: 1rem;
+  color: var(--purple);
+  margin-bottom: 1.5rem;
 }
 
-.placeholderTitle {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-  letter-spacing: 0.02em;
+.csTitle {
+  font-family: var(--font-poster);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  text-transform: uppercase;
+  color: var(--cream);
+  margin-bottom: 1.25rem;
 }
 
-.placeholderText {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  max-width: 420px;
-  margin: 0 auto 2.5rem;
-  line-height: 1.7;
+.csText {
+  font-size: 11px;
+  color: var(--muted);
+  max-width: 400px;
+  margin: 0 auto 3rem;
+  line-height: 1.8;
 }
 
-.notifyLink {
+.ctaBtn {
   display: inline-block;
-  padding: 0.9rem 2.5rem;
-  background: var(--accent-gold);
-  color: var(--bg-primary);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
+  padding: 0.85rem 2.5rem;
+  background: var(--purple);
+  color: var(--black);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   transition: opacity 0.2s;
 }
-
-.notifyLink:hover {
-  opacity: 0.85;
-}
-
-.storeEmbed {
-  margin-bottom: 5rem;
-}
+.ctaBtn:hover { opacity: 0.8; }

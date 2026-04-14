@@ -1,26 +1,32 @@
+.page { max-width: 1140px; margin: 0 auto; padding: 0 2rem 6rem; }
+
 .header {
-  padding: 4rem 0 3rem;
+  padding: 5rem 0 4rem;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 }
 
-.subtitle {
-  color: var(--text-secondary);
-  font-size: 1rem;
-  margin-top: 1rem;
+.title {
+  font-family: var(--font-poster);
+  font-size: clamp(5rem, 15vw, 12rem);
+  text-transform: uppercase;
+  color: var(--cream);
+  line-height: 0.85;
+  margin-bottom: 1.5rem;
 }
+
+.sub { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; }
 
 .videoGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 2rem;
   margin-bottom: 5rem;
 }
 
 .videoCard {
-  background: var(--bg-card);
+  background: var(--card);
   border: 1px solid var(--border);
-  overflow: hidden;
 }
 
 .videoEmbed {
@@ -29,116 +35,68 @@
   height: 0;
   overflow: hidden;
 }
-
 .videoEmbed iframe {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
 }
 
-.videoMeta {
-  padding: 1.25rem;
-}
+.videoMeta { padding: 1rem 1.25rem; }
 
 .videoCategory {
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--accent-gold);
+  color: var(--purple);
 }
 
 .videoTitle {
   font-family: var(--font-serif);
   font-size: 1.1rem;
-  color: var(--text-primary);
+  color: var(--cream);
   margin-top: 0.4rem;
 }
 
 /* Coming soon state */
 .comingSoon {
   border: 1px solid var(--border);
-  background: var(--bg-card);
-  padding: 6rem 2rem;
+  padding: 7rem 3rem;
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
+  background: var(--surface);
 }
 
-.comingSoonLabel {
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.25em;
+.csLabel {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--accent-gold);
-  margin-bottom: 1rem;
-}
-
-.comingSoonTitle {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-}
-
-.comingSoonText {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  max-width: 400px;
-  margin: 0 auto 2.5rem;
-}
-
-.channelLinks {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.channelLink {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  padding: 1rem 1.5rem;
-  border: 1px solid var(--border-accent);
-  transition: border-color 0.2s;
-  text-align: left;
-}
-
-.channelLink:hover {
-  border-color: var(--accent-gold);
-}
-
-.channelName {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.channelDesc {
-  font-size: 0.75rem;
-  color: var(--accent-gold);
-}
-
-/* Bottom channel section */
-.channelSection {
-  padding: 3rem 0 5rem;
-  border-top: 1px solid var(--border);
-}
-
-.channelSectionLabel {
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--purple);
   margin-bottom: 1.5rem;
+}
+
+.csTitle {
+  font-family: var(--font-poster);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  text-transform: uppercase;
+  color: var(--cream);
+  margin-bottom: 1rem;
+}
+
+.csText {
+  font-size: 11px;
+  color: var(--muted);
+  max-width: 400px;
+  margin: 0 auto 3rem;
+  line-height: 1.8;
 }
 
 .channelGrid {
   display: flex;
   gap: 1rem;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -146,24 +104,37 @@
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  padding: 1.25rem 1.75rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  transition: background 0.2s, border-color 0.2s;
+  padding: 1.25rem 2rem;
+  border: 1px solid var(--border-hi);
+  text-align: left;
+  transition: border-color 0.2s;
+}
+.channelCard:hover { border-color: var(--purple); }
+
+.channelName {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cream);
 }
 
-.channelCard:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--border-accent);
+.channelDesc {
+  font-size: 9px;
+  color: var(--purple);
+  letter-spacing: 0.08em;
 }
 
-.channelCardName {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--text-primary);
+.bookingNote {
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+  font-size: 10px;
+  color: var(--very-muted);
+  letter-spacing: 0.08em;
 }
 
-.channelCardDesc {
-  font-size: 0.75rem;
-  color: var(--accent-gold);
+.bookingLink {
+  color: var(--purple);
+  transition: opacity 0.2s;
 }
+.bookingLink:hover { opacity: 0.6; }

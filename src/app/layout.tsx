@@ -2,35 +2,29 @@ import type { Metadata } from 'next';
 import '../styles/globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Ticker from '@/components/Ticker';
 
 export const metadata: Metadata = {
-  title: {
-    default: 'Dizzy Izzy',
-    template: '%s | Dizzy Izzy',
-  },
-  description: 'Official website of Dizzy Izzy — new wave, disco, rock, pop. Shows, music, merch and more.',
+  title: { default: 'Dizzy Izzy', template: '%s — Dizzy Izzy' },
+  description: 'Official site of Dizzy Izzy. New wave, disco, rock, pop. Shows, music, merch.',
   openGraph: {
     title: 'Dizzy Izzy',
-    description: 'Official website of Dizzy Izzy — new wave, disco, rock, pop.',
-    url: 'https://dizzyizzy.com',
+    description: 'New wave, disco, rock, pop. Whatever it needs.',
+    url: 'https://cameronphan.com',
     siteName: 'Dizzy Izzy',
-    locale: 'en_US',
     type: 'website',
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="grain">
+      <body>
         <Navbar />
-        <main className="page-wrapper">
+        <div className="page">
           {children}
-        </main>
+        </div>
+        <Ticker />
         <Footer />
       </body>
     </html>

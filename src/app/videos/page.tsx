@@ -1,52 +1,35 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import styles from './page.module.css';
 
-export const metadata: Metadata = {
-  title: 'Videos',
-  description: 'Watch Dizzy Izzy music videos, live footage, and more.',
-};
+export const metadata: Metadata = { title: 'Videos' };
 
-// To add new videos: add an object to this array with the YouTube video ID
-// You can find the video ID in the YouTube URL after "watch?v="
-// Example: https://www.youtube.com/watch?v=ABC123 → id: 'ABC123'
-const videos: { id: string; title: string; category: string }[] = [
-  // Placeholder — replace with real video IDs when available
-  // { id: 'YOUR_VIDEO_ID', title: 'Video Title', category: 'Music Video' },
-];
+// Add videos here when ready:
+// { id: 'YOUTUBE_VIDEO_ID', title: 'Video Title', category: 'Music Video' }
+const videos: { id: string; title: string; category: string }[] = [];
 
-// Channel links
 const channels = [
-  {
-    name: 'Dizzy Izzy on YouTube',
-    url: 'https://www.youtube.com/@music.cameronphan',
-    desc: 'Official music channel',
-  },
-  {
-    name: 'YouTube Music',
-    url: 'https://music.youtube.com/channel/UCw8RIQdp_79fxJoYzrkic0A',
-    desc: 'Stream on YouTube Music',
-  },
+  { name: 'YouTube', url: 'https://www.youtube.com/@music.cameronphan', desc: 'Official channel' },
+  { name: 'YouTube Music', url: 'https://music.youtube.com/channel/UCw8RIQdp_79fxJoYzrkic0A', desc: 'Stream on YouTube Music' },
 ];
 
 export default function VideosPage() {
   return (
-    <div className="container">
+    <div className={styles.page}>
       <div className={styles.header}>
-        <p className="section-label">Watch</p>
-        <h1 className="section-title">Videos</h1>
-        <p className={styles.subtitle}>
-          Music videos, live performances, and more.
-        </p>
+        <span className="eyebrow">Watch</span>
+        <h1 className={styles.title}>Videos</h1>
+        <p className={styles.sub}>Music videos, live performances, and more.</p>
       </div>
 
       {videos.length > 0 ? (
         <div className={styles.videoGrid}>
-          {videos.map((video: { id: string; title: string; category: string }) => (
-            <div key={video.id} className={styles.videoCard}>
+          {videos.map((v) => (
+            <div key={v.id} className={styles.videoCard}>
               <div className={styles.videoEmbed}>
                 <iframe
-                  src={`https://www.youtube.com/embed/${video.id}`}
-                  title={video.title}
+                  src={`https://www.youtube.com/embed/${v.id}`}
+                  title={v.title}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -54,54 +37,30 @@ export default function VideosPage() {
                 />
               </div>
               <div className={styles.videoMeta}>
-                <span className={styles.videoCategory}>{video.category}</span>
-                <p className={styles.videoTitle}>{video.title}</p>
+                <span className={styles.videoCategory}>{v.category}</span>
+                <p className={styles.videoTitle}>{v.title}</p>
               </div>
             </div>
           ))}
         </div>
       ) : (
         <div className={styles.comingSoon}>
-          <div className={styles.comingSoonInner}>
-            <p className={styles.comingSoonLabel}>Coming Soon</p>
-            <h2 className={styles.comingSoonTitle}>Videos on the way</h2>
-            <p className={styles.comingSoonText}>
-              New visual content is in the works. In the meantime, visit the YouTube channel.
-            </p>
-            <div className={styles.channelLinks}>
-              {channels.map((ch) => (
-                <a
-                  key={ch.url}
-                  href={ch.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.channelLink}
-                >
-                  <span className={styles.channelName}>{ch.name}</span>
-                  <span className={styles.channelDesc}>{ch.desc} →</span>
-                </a>
-              ))}
-            </div>
+          <p className={styles.csLabel}>Coming Soon</p>
+          <h2 className={styles.csTitle}>Videos on the way</h2>
+          <p className={styles.csText}>New visual content is in the works. Visit the YouTube channel in the meantime.</p>
+          <div className={styles.channelGrid}>
+            {channels.map((c) => (
+              <a key={c.url} href={c.url} target="_blank" rel="noopener noreferrer" className={styles.channelCard}>
+                <span className={styles.channelName}>{c.name}</span>
+                <span className={styles.channelDesc}>{c.desc} ↗</span>
+              </a>
+            ))}
           </div>
         </div>
       )}
 
-      <div className={styles.channelSection}>
-        <p className={styles.channelSectionLabel}>Channels</p>
-        <div className={styles.channelGrid}>
-          {channels.map((ch) => (
-            <a
-              key={ch.url}
-              href={ch.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.channelCard}
-            >
-              <span className={styles.channelCardName}>{ch.name}</span>
-              <span className={styles.channelCardDesc}>{ch.desc} →</span>
-            </a>
-          ))}
-        </div>
+      <div className={styles.bookingNote}>
+        <p>For press or sync inquiries — <Link href="/contact" className={styles.bookingLink}>contact us →</Link></p>
       </div>
     </div>
   );

@@ -1,73 +1,67 @@
 import Link from 'next/link';
+import {
+  SpotifyIcon,
+  AppleMusicIcon,
+  YoutubeMusicIcon,
+  YoutubeIcon,
+  InstagramIcon,
+} from './Icons';
 import styles from './Footer.module.css';
 
-const navLinks = [
-  { href: '/shows', label: 'Shows' },
-  { href: '/music', label: 'Music' },
-  { href: '/videos', label: 'Videos' },
-  { href: '/merch', label: 'Merch' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
+const socialLinks = [
+  { href: 'https://open.spotify.com/artist/0zivcUeYnXj4nR0jl8735K', icon: <SpotifyIcon />,        label: 'Spotify'       },
+  { href: 'https://music.apple.com/us/artist/dizzy-izzy/1853730221', icon: <AppleMusicIcon />,     label: 'Apple Music'   },
+  { href: 'https://music.youtube.com/channel/UCw8RIQdp_79fxJoYzrkic0A', icon: <YoutubeMusicIcon />, label: 'YouTube Music' },
+  { href: 'https://www.youtube.com/@music.cameronphan',               icon: <YoutubeIcon />,        label: 'YouTube'       },
+  { href: 'https://www.instagram.com/justdizzyizzy',                  icon: <InstagramIcon />,      label: 'Instagram'     },
 ];
 
-const socialLinks = [
-  { href: 'https://www.instagram.com/justdizzyizzy', label: 'Instagram' },
-  { href: 'https://open.spotify.com/artist/0zivcUeYnXj4nR0jl8735K', label: 'Spotify' },
-  { href: 'https://music.apple.com/us/artist/dizzy-izzy/1853730221', label: 'Apple Music' },
-  { href: 'https://music.youtube.com/channel/UCw8RIQdp_79fxJoYzrkic0A', label: 'YouTube Music' },
-  { href: 'https://www.youtube.com/@music.cameronphan', label: 'YouTube' },
+const navLinks = [
+  { href: '/shows',   label: 'Shows'   },
+  { href: '/music',   label: 'Music'   },
+  { href: '/videos',  label: 'Videos'  },
+  { href: '/merch',   label: 'Merch'   },
+  { href: '/about',   label: 'About'   },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.inner}>
-        <div className={styles.top}>
-          <div className={styles.brand}>
-            <span className={styles.logo}>Dizzy Izzy</span>
-            <p className={styles.tagline}>New wave. Disco. Rock. Pop. Whatever it needs.</p>
-          </div>
-
-          <div className={styles.cols}>
-            <div className={styles.col}>
-              <p className={styles.colLabel}>Navigate</p>
-              <ul className={styles.colLinks}>
-                {navLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} className={styles.footerLink}>
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className={styles.col}>
-              <p className={styles.colLabel}>Listen & Follow</p>
-              <ul className={styles.colLinks}>
-                {socialLinks.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.footerLink}
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+      <div className={styles.top}>
+        <span className={styles.logo}>Dizzy Izzy</span>
+        <div className={styles.icons}>
+          {socialLinks.map((s) => (
+            <a
+              key={s.href}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="platform-icon"
+              aria-label={s.label}
+            >
+              {s.icon}
+            </a>
+          ))}
         </div>
+      </div>
 
-        <div className={styles.bottom}>
-          <p className={styles.copy}>© {new Date().getFullYear()} Dizzy Izzy. All rights reserved.</p>
-          <Link href="/contact" className={styles.bookingLink}>
-            Booking & Press Inquiries →
-          </Link>
-        </div>
+      <div className={styles.rule} />
+
+      <div className={styles.bottom}>
+        <nav className={styles.nav}>
+          {navLinks.map((l) => (
+            <Link key={l.href} href={l.href} className={styles.navLink}>
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+        <p className={styles.copy}>
+          © {new Date().getFullYear()} Dizzy Izzy. All rights reserved.
+        </p>
+        <Link href="/contact" className={styles.bookingLink}>
+          Booking & Press →
+        </Link>
       </div>
     </footer>
   );

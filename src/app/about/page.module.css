@@ -1,251 +1,189 @@
-.hero {
-  padding: 4rem 0 5rem;
+.page { max-width: 1140px; margin: 0 auto; padding: 0 2rem 6rem; }
+
+.header {
+  padding: 5rem 0 4rem;
   border-bottom: 1px solid var(--border);
+  margin-bottom: 5rem;
 }
 
-.heroInner {
+.title {
+  font-family: var(--font-poster);
+  font-size: clamp(5rem, 15vw, 12rem);
+  text-transform: uppercase;
+  color: var(--cream);
+  line-height: 0.82;
+  letter-spacing: 0.01em;
+}
+
+/* Bio grid */
+.bioGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.4fr;
   gap: 5rem;
-  align-items: center;
+  align-items: start;
+  margin-bottom: 6rem;
 }
 
-.heroTitle {
-  font-family: var(--font-display);
-  font-size: clamp(4rem, 10vw, 8rem);
-  line-height: 0.9;
-  letter-spacing: 0.02em;
-  color: var(--text-primary);
-  margin-bottom: 2rem;
-}
-
-.heroQuote {
-  font-family: var(--font-serif);
-  font-size: clamp(1.2rem, 2.5vw, 1.7rem);
-  font-style: italic;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  border-left: 2px solid var(--accent-gold);
-  padding-left: 1.5rem;
-}
-
-.heroImg {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.imgPlaceholder {
-  width: 100%;
-  max-width: 440px;
-  aspect-ratio: 3/4;
-  background: var(--bg-card);
+.photoPlaceholder {
+  aspect-ratio: 3 / 4;
+  background: var(--card);
   border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-.imgPlaceholder span {
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
+.photoPlaceholder span {
+  font-size: 8px;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--very-muted);
 }
 
-/* Bio */
-.bio {
-  padding: 5rem 0;
-  border-bottom: 1px solid var(--border);
+/* Real photo style when added */
+.photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
 }
 
-.bioInner {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 5rem;
-  align-items: start;
+.pullQuote {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 300;
+  font-style: normal;
+  color: var(--cream);
+  line-height: 1.3;
+  margin-bottom: 2.5rem;
+  border-left: 2px solid var(--purple);
+  padding-left: 1.5rem;
+}
+.pullQuote em {
+  font-style: italic;
+  color: var(--purple);
 }
 
 .bioCopy {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
 }
-
 .bioCopy p {
-  color: var(--text-secondary);
-  font-size: 1.05rem;
-  line-height: 1.8;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.9;
 }
 
-.bioSidebar {
+.tags {
   display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-  padding-top: 2rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
-
-.sidebarBlock {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.sidebarLabel {
-  font-size: 0.65rem;
-  font-weight: 500;
+.tag {
+  font-size: 8px;
+  font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--accent-gold);
+  color: var(--purple);
+  border: 1px solid var(--purple-dim);
+  padding: 0.4rem 0.9rem;
 }
 
-.sidebarList {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.sidebarList li {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-.sidebarLink {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  transition: color 0.2s;
-}
-
-.sidebarLink:hover {
-  color: var(--accent-gold);
-}
-
-/* Photos */
-.photos {
+/* Press photos */
+.pressSection {
   padding: 5rem 0;
-  border-bottom: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  margin-bottom: 5rem;
 }
 
 .photoGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
-  margin: 1.5rem 0 1.5rem;
+  margin: 2rem 0 1.5rem;
 }
 
-.photoPlaceholder {
-  aspect-ratio: 2/3;
-  background: var(--bg-card);
+.pressPlaceholder {
+  aspect-ratio: 2 / 3;
+  background: var(--card);
   border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
+  transition: border-color 0.2s;
 }
-
-.photoPlaceholder:hover {
-  background: var(--bg-card-hover);
-}
-
-.photoPlaceholder span {
-  font-size: 0.65rem;
+.pressPlaceholder:hover { border-color: var(--border-hi); }
+.pressPlaceholder span {
+  font-size: 8px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--very-muted);
 }
 
-.photoNote {
-  font-size: 0.8rem;
-  color: var(--text-muted);
+/* Real press photo */
+.pressPhoto {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  display: block;
 }
 
-.photoLink {
-  color: var(--accent-gold);
+.pressNote {
+  font-size: 10px;
+  color: var(--very-muted);
+  letter-spacing: 0.06em;
+}
+.pressLink {
+  color: var(--purple);
   transition: opacity 0.2s;
 }
+.pressLink:hover { opacity: 0.6; }
 
-.photoLink:hover {
-  opacity: 0.7;
-}
-
-/* Booking CTA */
-.bookingCta {
-  padding: 5rem 0;
-}
-
-.bookingCtaInner {
-  display: flex;
-  justify-content: space-between;
+/* CTA block */
+.ctaBlock {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
   align-items: center;
-  gap: 2rem;
-  flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  padding-top: 5rem;
 }
 
-.bookingCtaTitle {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  letter-spacing: 0.02em;
-  color: var(--text-primary);
-  margin-bottom: 0.75rem;
-}
-
-.bookingCtaText {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  max-width: 420px;
-}
-
-.bookingCtaBtn {
-  display: inline-block;
-  padding: 1rem 3rem;
-  background: var(--accent-gold);
-  color: var(--bg-primary);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
+.ctaTitle {
+  font-family: var(--font-poster);
+  font-size: clamp(3rem, 7vw, 6rem);
   text-transform: uppercase;
-  white-space: nowrap;
-  transition: opacity 0.2s, transform 0.2s;
+  color: var(--cream);
+  line-height: 0.85;
+  margin-top: 0.75rem;
 }
 
-.bookingCtaBtn:hover {
-  opacity: 0.85;
-  transform: translateY(-1px);
+.ctaText {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  max-width: 380px;
 }
 
-@media (max-width: 1024px) {
-  .bioInner {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
-  .bioSidebar {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 2rem;
-    padding-top: 0;
-    border-top: 1px solid var(--border);
-    padding-top: 2rem;
-  }
+.ctaBtn {
+  display: inline-block;
+  padding: 0.85rem 2.5rem;
+  background: var(--purple);
+  color: var(--black);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
 }
+.ctaBtn:hover { opacity: 0.8; }
 
-@media (max-width: 768px) {
-  .heroInner {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
-  .heroImg {
-    justify-content: flex-start;
-  }
-
-  .photoGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .bookingCtaInner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+@media (max-width: 860px) {
+  .bioGrid { grid-template-columns: 1fr; gap: 3rem; }
+  .photoGrid { grid-template-columns: repeat(2, 1fr); }
+  .ctaBlock { grid-template-columns: 1fr; gap: 2.5rem; }
 }
