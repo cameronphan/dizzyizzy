@@ -1,13 +1,15 @@
 'use client';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { SpotifyIcon, AppleMusicIcon, InstagramIcon, YoutubeIcon } from './Icons';
 import s from './Sidebar.module.css';
 
 const nav = [
-  { href: '/#shows', label: 'Shows'  },
-  { href: '/#merch', label: 'Merch'  },
-  { href: '/about',  label: 'About'  },
+  { href: '/',        label: 'Home',   sectionId: null      },
+  { href: '/#shows',  label: 'Shows',  sectionId: 'shows'   },
+  { href: '/#merch',  label: 'Merch',  sectionId: 'merch'   },
+  { href: '/about',   label: 'About',  sectionId: null      },
 ];
 
 const social = [
@@ -19,30 +21,78 @@ const social = [
 
 export default function Sidebar() {
   const path = usePathname();
+  const [activeSection, setActiveSection] = useState<string>('home');
+
+  useEffect(() => {
+    // Only run scroll detection on home page
+    if (path !== '/') {
+      setActiveSection(path.replace('/', '') || 'home');
+      return;
+    }
+
+    const sectionIds = ['shows', 'merch'];
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowH = window.innerHeight;
+
+      // Default to home
+      let current = 'home';
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        // Section is "active" when it's in the top half of the viewport
+        if (rect.top <= windowH * 0.45) {
+          current = id;
+        }
+      }
+
+      // If scrolled near bottom, keep last section active
+      setActiveSection(current);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // run on mount
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [path]);
+
+  const isActive = (item: typeof nav[0]) => {
+    if (path !== '/') {
+      // On sub-pages, match by path
+      return path === item.href;
+    }
+    // On home page, match by scroll section
+    if (item.sectionId) return activeSection === item.sectionId;
+    if (item.href === '/') return activeSection === 'home';
+    return false;
+  };
 
   return (
     <aside className={s.sidebar}>
-      {/* Logo — wordmark with purple left border accent */}
+      {/* Logo wordmark */}
       <Link href="/" className={s.logo}>
         <span className={s.logoAccent} />
         <span className={s.logoText}>Dizzy<br />Izzy</span>
       </Link>
 
-      {/* Nav — dash slides in on hover */}
+      {/* Nav with scroll-aware active state */}
       <nav className={s.nav}>
-        {nav.map(l => (
+        {nav.map(item => (
           <Link
-            key={l.href}
-            href={l.href}
-            className={`${s.link} ${path === l.href ? s.active : ''}`}
+            key={item.href}
+            href={item.href}
+            className={`${s.link} ${isActive(item) ? s.active : ''}`}
           >
             <span className={s.dash}>—</span>
-            <span>{l.label}</span>
+            <span>{item.label}</span>
           </Link>
         ))}
       </nav>
 
-      {/* Platform icons — large, icon only */}
+      {/* Platform icons */}
       <div className={s.icons}>
         {social.map(x => (
           <a key={x.href} href={x.href} target="_blank"
