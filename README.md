@@ -1,28 +1,26 @@
 # Dizzy Izzy — Official Website
 
-## How to update the site
-Edit any file → GitHub Desktop commit & push → Vercel auto-deploys in ~30 seconds.
+## How to update
+Edit file → GitHub Desktop commit & push → live in ~30 seconds.
 
 ## Adding videos
-Open `src/app/videos/page.tsx` and add to the `videos` array:
-```js
-{ id: 'YOUTUBE_VIDEO_ID', title: 'Song Name', category: 'Music Video' }
-```
+No videos page currently. When ready, ask Claude to add one.
 
 ## Adding photos
-Drop files into `public/photos/` and reference them as `/photos/filename.jpg`
+Drop files into `public/photos/` — reference as `/photos/filename.jpg`
 
-## Setting up the contact form
-1. Go to formspree.io → free account → create form → copy ID
-2. Open `src/app/contact/page.tsx`
-3. Replace `YOUR_FORM_ID` with your actual ID
+## Contact form (Formspree)
+1. formspree.io → free account → create form → copy ID
+2. Open `src/app/contact/page.tsx` → replace `YOUR_FORM_ID`
 
-## Setting up merch
-1. Set up Printful store → get embed code
-2. Open `src/app/merch/page.tsx` → replace placeholder with embed code
+## Email list
+Currently disabled (Coming Soon). When ready, replace the disabled input in `src/app/page.tsx` email section with a working Mailchimp or Formspree embed.
+
+## Merch (Printful)
+Open `src/app/page.tsx` → find the merch placeholder section → replace with Printful embed.
 
 ## Colors
-Edit `src/styles/globals.css` → `:root` section
-- `--purple: #9b6dff` main accent
-- `--black: #060508` background
-- `--cream: #f0eaf8` text
+`src/styles/globals.css` → `:root`
+- `--purple: #9b6dff`
+- `--black: #06050a`
+- `--cream: #ede8f5`
