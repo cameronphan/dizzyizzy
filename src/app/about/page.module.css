@@ -5,7 +5,7 @@
 .heroTitle { font-family:var(--font-display); font-weight:700; font-size:clamp(5rem,13vw,10rem); text-transform:uppercase; color:var(--cream); line-height:0.85; margin-top:8px; }
 
 /* MAGAZINE PULL QUOTE */
-.pullSection { padding:80px 64px 80px calc(var(--sidebar-w) + 48px); }
+.pullSection { padding:80px 64px; margin-left:var(--sidebar-w); }
 .pullQuote {
   font-family:var(--font-display);
   font-weight:300;
@@ -19,7 +19,7 @@
 }
 .pullQuote em { font-style:italic; color:var(--purple); }
 
-.bioSection { padding:64px 64px 64px calc(var(--sidebar-w) + 48px); display:flex; flex-direction:column; gap:2rem; max-width:calc(680px + var(--sidebar-w)); }
+.bioSection { padding:64px; margin-left:var(--sidebar-w); display:flex; flex-direction:column; gap:2rem; max-width:680px; }
 .bioCopy { display:flex; flex-direction:column; gap:1.25rem; }
 .bioCopy p { font-size:13px; color:var(--muted); line-height:1.9; font-weight:300; }
 .bioTags { display:flex; flex-wrap:wrap; gap:0.5rem; }
@@ -30,7 +30,7 @@
 .pressImg { object-fit:cover; object-position:center top; filter:brightness(0.8) saturate(0.85); transition:transform 0.5s,filter 0.5s; }
 .pressItem:hover .pressImg { transform:scale(1.04); filter:brightness(0.95) saturate(1); }
 
-.pressNote { padding:1.25rem 64px 1.25rem calc(var(--sidebar-w) + 48px); font-size:9px; color:var(--very-faint); letter-spacing:0.08em; }
+.pressNote { padding:1.25rem 64px; margin-left:var(--sidebar-w); font-size:9px; color:var(--very-faint); letter-spacing:0.08em; }
 .pressLink { color:var(--purple); transition:opacity 0.2s; }
 .pressLink:hover { opacity:0.6; }
 
@@ -38,23 +38,23 @@
 .wideShotImg { object-fit:cover; object-position:center 25%; filter:brightness(0.52) saturate(0.75); }
 .wideShotOverlay { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(8,5,14,0.6) 0%,transparent 30%,transparent 70%,rgba(8,5,14,0.6) 100%); }
 
-.ctaSection { display:flex; align-items:center; justify-content:space-between; padding:80px 64px 80px calc(var(--sidebar-w) + 48px); gap:3rem; flex-wrap:wrap; }
+.ctaSection { display:flex; align-items:center; justify-content:space-between; padding:80px 64px; margin-left:var(--sidebar-w); gap:3rem; flex-wrap:wrap; }
 .ctaTitle { font-family:var(--font-display); font-weight:700; font-size:clamp(3rem,7vw,5.5rem); text-transform:uppercase; color:var(--cream); line-height:0.85; margin-top:0.5rem; }
 .ctaText { font-size:12px; color:var(--muted); line-height:1.8; max-width:340px; margin-top:1rem; font-weight:300; }
 .ctaBtn { display:inline-block; padding:0.85rem 2.5rem; background:var(--purple); color:var(--bg); font-family:var(--font-body); font-size:9px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; transition:opacity 0.2s; white-space:nowrap; }
 .ctaBtn:hover { opacity:0.82; }
 
-.footer { display:flex; align-items:center; justify-content:space-between; padding:20px 64px 20px calc(var(--sidebar-w) + 48px); border-top:1px solid rgba(155,109,255,0.2); font-size:9px; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--very-faint); }
+.footer { display:flex; align-items:center; justify-content:space-between; padding:20px 64px; margin-left:var(--sidebar-w); border-top:1px solid rgba(155,109,255,0.2); font-size:9px; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--very-faint); }
 .footerRule { flex:1; height:1px; background:rgba(155,109,255,0.15); margin:0 2rem; }
 .footerContact { color:var(--purple); font-size:9px; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; transition:opacity 0.2s; }
 .footerContact:hover { opacity:0.6; }
 
 @media (max-width:768px) {
   .heroText { left:24px; }
-  .pullSection,.bioSection { padding:52px 24px; }
+  .pullSection,.bioSection { padding:52px 24px; margin-left:0; }
   .pressGrid { grid-template-columns:repeat(2,1fr); height:auto; }
   .pressItem { aspect-ratio:2/3; }
-  .pressNote,.ctaSection { padding:1rem 24px; }
-  .ctaSection { padding:52px 24px; flex-direction:column; align-items:flex-start; }
-  .footer { padding:20px 24px; }
+  .pressNote { padding:1rem 24px; margin-left:0; }
+  .ctaSection { padding:52px 24px; margin-left:0; flex-direction:column; align-items:flex-start; }
+  .footer { padding:20px 24px; margin-left:0; }
 }

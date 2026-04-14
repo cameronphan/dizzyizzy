@@ -381,7 +381,8 @@
 /* ── EMAIL ────────────────────────────────────────── */
 .emailSection {
   position: relative;
-  padding: 100px 64px 100px calc(var(--sidebar-w) + 48px);
+  padding: 100px 64px;
+  margin-left: var(--sidebar-w);
   overflow: hidden;
   text-align: center;
 }
@@ -464,7 +465,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 64px 20px calc(var(--sidebar-w) + 48px);
+  padding: 20px 64px;
+  margin-left: var(--sidebar-w);
   border-top: 1px solid rgba(155,109,255,0.2);
   font-size: 9px;
   font-weight: 500;
