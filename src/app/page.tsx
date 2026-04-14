@@ -54,31 +54,44 @@ export default function Home() {
       </section>
 
       {/* ── 2. SHOWS ──────────────────────────────────── */}
-      <section className={s.section} id="shows">
-        <span className="eyebrow">Live</span>
-        <h2 className="sec-title">Shows</h2>
-        <div className={s.ticketWrap}>
-          <div dangerouslySetInnerHTML={{ __html: `
-            <div class="tt-widget">
-              <div class="tt-widget-fallback">
-                <p><a href="https://www.tickettailor.com/all-tickets/cameronphanmusic/?ref=website_widget" target="_blank">Click here to buy tickets</a></p>
-              </div>
-              <script src="https://cdn.tickettailor.com/js/widgets/min/widget.js"
-                data-url="https://www.tickettailor.com/all-tickets/cameronphanmusic/?ref=website_widget&show_search_filter=true&show_date_filter=true&show_sort=true"
-                data-type="inline"
-                data-inline-minimal="true"
-                data-inline-show-logo="false"
-                data-inline-bg-fill="false"
-                data-inline-inherit-ref-from-url-param=""
-                data-inline-ref="website_widget">
-              </script>
-            </div>
-          `}} />
+      <section className={s.section} id="shows" style={{ position: 'relative', overflow: 'hidden' }}>
+        {/* Subtle portrait ghost behind the section */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+          <Image
+            src="/photos/B-Dark-Eyes-1_result.jpg"
+            alt=""
+            fill
+            className={s.showsBg}
+            sizes="100vw"
+          />
+          <div className={s.showsBgOverlay} />
         </div>
-        <p className={s.bookNote}>
-          Booking inquiries →{' '}
-          <Link href="/contact" className={s.bookLink}>contact us</Link>
-        </p>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <span className="eyebrow">Live</span>
+          <h2 className="sec-title">Shows</h2>
+          <div className={s.ticketWrap}>
+            <div dangerouslySetInnerHTML={{ __html: `
+              <div class="tt-widget">
+                <div class="tt-widget-fallback">
+                  <p><a href="https://www.tickettailor.com/all-tickets/cameronphanmusic/?ref=website_widget" target="_blank">Click here to buy tickets</a></p>
+                </div>
+                <script src="https://cdn.tickettailor.com/js/widgets/min/widget.js"
+                  data-url="https://www.tickettailor.com/all-tickets/cameronphanmusic/?ref=website_widget&show_search_filter=true&show_date_filter=true&show_sort=true"
+                  data-type="inline"
+                  data-inline-minimal="true"
+                  data-inline-show-logo="false"
+                  data-inline-bg-fill="false"
+                  data-inline-inherit-ref-from-url-param=""
+                  data-inline-ref="website_widget">
+                </script>
+              </div>
+            `}} />
+          </div>
+          <p className={s.bookNote}>
+            Booking inquiries →{' '}
+            <Link href="/contact" className={s.bookLink}>contact us</Link>
+          </p>
+        </div>
       </section>
 
       {/* ── 3. WIDE PHOTO BREAK ───────────────────────── */}

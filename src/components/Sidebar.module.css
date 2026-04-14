@@ -10,6 +10,7 @@
   padding: 36px 0 36px 32px;
   z-index: 50;
   pointer-events: all;
+  background: transparent;
 }
 
 .logo {
