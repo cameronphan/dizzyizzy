@@ -40,8 +40,18 @@ input { cursor: crosshair; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--purple-dim); }
 
-/* GRAIN — heavy, filmic, screen blend */
-body::after {
+/* BOTTOM GRADIENT — mirrors sidebar gradient, fixed to bottom of viewport */
+body::before {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  pointer-events: none;
+  z-index: 9997;
+  background: linear-gradient(to top, rgba(4,3,10,0.75) 0%, rgba(4,3,10,0.35) 50%, transparent 100%);
+}
   content: '';
   position: fixed;
   inset: 0;
