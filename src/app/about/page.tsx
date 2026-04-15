@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import Footer from '@/components/Footer';
 import s from './page.module.css';
 
 export const metadata: Metadata = { title: 'About' };
@@ -75,12 +76,7 @@ export default function About() {
         <Link href="/contact" className={s.ctaBtn}>Get in Touch</Link>
       </div>
 
-      {/* One line footer */}
-      <footer className={s.footer}>
-        <span>© {new Date().getFullYear()} Dizzy Izzy</span>
-        <div className={s.footerRule} />
-        <Link href="/contact" className={s.footerContact}>Booking &amp; Press</Link>
-      </footer>
+      <Footer />
     </>
   );
 }

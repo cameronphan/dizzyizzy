@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import Footer from '@/components/Footer';
 import s from './page.module.css';
 
 type Tab = 'fan' | 'booking';
@@ -72,11 +73,7 @@ export default function Contact() {
           </div>
         </div>
       </div>
-      <footer className={s.footer}>
-        <span>© {new Date().getFullYear()} Dizzy Izzy</span>
-        <div className={s.footerRule} />
-        <Link href="/contact" className={s.footerContact}>Booking &amp; Press</Link>
-      </footer>
+      <Footer />
     </>
   );
 }

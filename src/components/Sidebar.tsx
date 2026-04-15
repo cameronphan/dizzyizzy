@@ -33,7 +33,6 @@ export default function Sidebar() {
     const sectionIds = ['shows', 'merch'];
 
     const handleScroll = () => {
-      const scrollY = window.scrollY;
       const windowH = window.innerHeight;
 
       // Default to home

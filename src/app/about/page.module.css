@@ -56,5 +56,4 @@
   .pressItem { aspect-ratio:2/3; }
   .pressNote { padding:1rem 24px; margin-left:0; }
   .ctaSection { padding:52px 24px; margin-left:0; flex-direction:column; align-items:flex-start; }
-  .footer { padding:20px 24px; margin-left:0; }
 }

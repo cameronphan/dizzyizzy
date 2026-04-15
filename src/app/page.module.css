@@ -23,7 +23,6 @@
   pointer-events: none;
 }
 
-/* Vignette fades only in the final 8% — photo breathes full length */
 .heroVignette {
   position: absolute;
   inset: 0;
@@ -36,7 +35,6 @@
 .heroTitle {
   position: absolute;
   bottom: 44px;
-  /* Offset right of sidebar */
   left: calc(var(--sidebar-w) + 32px);
   z-index: 2;
   display: flex;
@@ -64,7 +62,6 @@
   margin-left: clamp(1rem, 4vw, 4rem);
 }
 
-/* Layer 1 — cycles cyan→green→yellow, offset left */
 .izzy1 {
   font-family: var(--font-display);
   font-weight: 700;
@@ -78,7 +75,6 @@
   pointer-events: none;
 }
 
-/* Layer 2 — cycles magenta→red→orange, offset right */
 .izzy2 {
   font-family: var(--font-display);
   font-weight: 700;
@@ -92,7 +88,6 @@
   pointer-events: none;
 }
 
-/* Layer 3 — main, cycles purple→white→neon green→purple */
 .izzy3 {
   font-family: var(--font-display);
   font-weight: 700;
@@ -148,7 +143,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 8px;
+  gap: 12px;
   animation: fadeUp 0.9s 0.15s ease both;
 }
 
@@ -158,33 +153,113 @@
   font-weight: 500;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--faint);
+  color: rgba(237,232,245,0.5);
 }
 
-.releaseLink {
+/* Card layout: cover left, info right */
+.releaseCard {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
+  align-items: center;
+  gap: 16px;
+  background: rgba(8,5,14,0.6);
+  border: 1px solid rgba(155,109,255,0.25);
+  backdrop-filter: blur(16px);
+  padding: 14px 18px;
+}
+
+/* ── PULSING COVER ART ────────────────────────────── */
+.releaseCoverWrap {
+  position: relative;
+  flex-shrink: 0;
+  display: block;
+  width: 90px;
+  height: 90px;
+}
+
+/* Glow ring that pulses behind the cover */
+.coverGlow {
+  position: absolute;
+  inset: -6px;
+  border-radius: 2px;
+  background: radial-gradient(ellipse at center, rgba(155,109,255,0.45) 0%, transparent 70%);
+  animation: coverPulse 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes coverPulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.95); }
+  50%       { opacity: 1;   transform: scale(1.08); }
 }
 
 .releaseCover {
-  width: 200px;
-  height: 200px;
+  position: relative;
+  z-index: 1;
+  width: 90px;
+  height: 90px;
   object-fit: cover;
   display: block;
-  transition: opacity 0.2s;
+  transition: transform 0.3s ease;
 }
-.releaseLink:hover .releaseCover { opacity: 0.85; }
+.releaseCoverWrap:hover .releaseCover { transform: scale(1.03); }
+
+/* ── RELEASE INFO ─────────────────────────────────── */
+.releaseInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 120px;
+}
+
+/* NOW PLAYING — animated equalizer bars */
+.nowPlaying {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.bar {
+  display: block;
+  width: 2px;
+  background: var(--purple);
+  border-radius: 1px;
+  animation: eqBounce 1.2s ease-in-out infinite;
+}
+.bar:nth-child(1) { height: 6px;  animation-delay: 0s; }
+.bar:nth-child(2) { height: 10px; animation-delay: 0.15s; }
+.bar:nth-child(3) { height: 8px;  animation-delay: 0.3s; }
+.bar:nth-child(4) { height: 12px; animation-delay: 0.45s; }
+
+@keyframes eqBounce {
+  0%, 100% { transform: scaleY(0.4); }
+  50%       { transform: scaleY(1); }
+}
+
+.nowPlayingText {
+  font-family: var(--font-body);
+  font-size: 7px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
 
 .releaseTrack {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 28px;
+  font-size: 20px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--cream);
-  text-align: right;
+  line-height: 1;
   display: block;
 }
 
@@ -194,60 +269,27 @@
   font-weight: 400;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--faint);
-  text-align: right;
+  color: rgba(237,232,245,0.45);
   display: block;
-}
-
-.releaseListen {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-  font-family: var(--font-body);
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--purple);
-}
-
-/* Animated pulse dots */
-.pulse { display: flex; align-items: center; gap: 3px; }
-.dot1, .dot2, .dot3 {
-  display: block;
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: var(--purple);
-  animation: dotPulse 1.4s ease-in-out infinite;
-}
-.dot2 { animation-delay: 0.2s; }
-.dot3 { animation-delay: 0.4s; }
-
-@keyframes dotPulse {
-  0%, 100% { opacity: 0.3; transform: scale(0.7); }
-  50%       { opacity: 1;   transform: scale(1.2); }
 }
 
 /* ── STREAMING BUTTONS ────────────────────────────── */
 .streamIcons {
   display: flex;
-  gap: 8px;
-  justify-content: flex-end;
-  margin-top: 2px;
+  gap: 6px;
+  margin-top: 6px;
 }
 
 .streamBtn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
+  gap: 5px;
+  padding: 5px 10px;
   border: 1px solid var(--border-hi);
-  background: rgba(8,5,14,0.6);
-  backdrop-filter: blur(8px);
+  background: rgba(8,5,14,0.5);
   color: var(--muted);
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 7px;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -280,6 +322,33 @@
 }
 .ticketWrap :global(a) { color: var(--purple) !important; }
 
+/* ── PHOTO BREAK — Ken Burns slow zoom ───────────── */
+.photoBreak {
+  position: relative;
+  height: 420px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.photoBreakImg {
+  object-fit: cover;
+  object-position: center 30%;
+  filter: brightness(0.58) saturate(0.85);
+  animation: kenBurns 18s ease-in-out infinite alternate;
+  transform-origin: center center;
+}
+
+@keyframes kenBurns {
+  from { transform: scale(1);    object-position: center 25%; }
+  to   { transform: scale(1.08); object-position: center 35%; }
+}
+
+.photoBreakOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(8,5,14,0.65) 0%, transparent 25%, transparent 75%, rgba(8,5,14,0.65) 100%);
+}
+
 /* ── MERCH SCROLL ─────────────────────────────────── */
 .merchScroll {
   display: flex;
@@ -306,10 +375,16 @@
   border: 1px solid var(--border);
   padding: 24px 16px 20px;
   background: var(--surface);
-  transition: border-color 0.2s;
+  transition: border-color 0.3s, box-shadow 0.3s;
   cursor: crosshair;
+  position: relative;
 }
-.merchItem:hover { border-color: rgba(155,109,255,0.4); }
+
+/* Purple glow on hover */
+.merchItem:hover {
+  border-color: rgba(155,109,255,0.5);
+  box-shadow: 0 0 24px rgba(155,109,255,0.12), inset 0 0 24px rgba(155,109,255,0.04);
+}
 
 .merchShirt {
   width: 100%;
@@ -318,7 +393,9 @@
   align-items: center;
   justify-content: center;
   opacity: 0.22;
+  transition: opacity 0.3s;
 }
+.merchItem:hover .merchShirt { opacity: 0.38; }
 
 .merchItemLabel {
   font-size: 8px;
@@ -327,7 +404,9 @@
   text-transform: uppercase;
   color: var(--very-faint);
   text-align: center;
+  transition: color 0.3s;
 }
+.merchItem:hover .merchItemLabel { color: var(--faint); }
 
 .merchItemPrice {
   font-size: 10px;
@@ -335,36 +414,6 @@
   letter-spacing: 0.1em;
   color: var(--faint);
   text-align: center;
-}
-
-/* ── PHOTO BREAK — full width ─────────────────────── */
-.photoBreak {
-  position: relative;
-  height: 420px;
-  overflow: hidden;
-  width: 100%;
-}
-
-.photoBreakImg {
-  object-fit: cover;
-  object-position: center 30%;
-  filter: brightness(0.58) saturate(0.85);
-}
-
-.photoBreakOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(8,5,14,0.65) 0%, transparent 25%, transparent 75%, rgba(8,5,14,0.65) 100%);
-}
-
-/* ── MERCH ────────────────────────────────────────── */
-.comingSoon {
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--very-faint);
-  margin-bottom: 1.5rem;
 }
 
 .merchCta {
@@ -460,47 +509,17 @@
   margin-top: 12px;
 }
 
-/* ── FOOTER ───────────────────────────────────────── */
-.footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 64px;
-  margin-left: var(--sidebar-w);
-  border-top: 1px solid rgba(155,109,255,0.2);
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--very-faint);
-}
-
-.footerRule {
-  flex: 1;
-  height: 1px;
-  background: rgba(155,109,255,0.15);
-  margin: 0 2rem;
-}
-
-.footerContact {
-  color: var(--purple);
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  transition: opacity 0.2s;
-}
-.footerContact:hover { opacity: 0.6; }
-
 /* ── RESPONSIVE ───────────────────────────────────── */
 @media (max-width: 768px) {
   .heroTitle { left: 24px; bottom: 32px; }
   .release { right: 24px; bottom: 32px; }
-  .releaseCover { width: 80px; height: 80px; }
+  .releaseCard { flex-direction: column; align-items: flex-end; }
+  .releaseCoverWrap { width: 70px; height: 70px; }
+  .releaseCover { width: 70px; height: 70px; }
   .releaseTrack { font-size: 16px; }
-  .section { padding: 64px 24px; }
-  .emailSection { padding: 80px 24px; }
-  .emailGallery { grid-template-columns: repeat(3,1fr); }
-  .footer { padding: 20px 24px; }
+  .section { padding: 64px 24px; margin-left: 0; }
+  .emailSection { padding: 80px 24px; margin-left: 0; }
+  .emailGallery { grid-template-columns: repeat(2, 1fr); }
   .izzyWrap { height: clamp(4rem, 14vw, 12rem); }
+  .merchScroll { justify-content: flex-start; }
 }
