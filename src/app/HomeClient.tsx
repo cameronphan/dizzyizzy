@@ -37,7 +37,6 @@ export default function HomeClient() {
         <div className={s.release}>
           <span className={s.releaseLabel}>Latest Release</span>
           <div className={s.releaseCard}>
-            {/* Cover with pulse glow */}
             <a
               href="https://open.spotify.com/artist/0zivcUeYnXj4nR0jl8735K"
               target="_blank"
@@ -54,7 +53,6 @@ export default function HomeClient() {
                 className={s.releaseCover}
               />
             </a>
-            {/* Track info */}
             <div className={s.releaseInfo}>
               <div className={s.nowPlaying}>
                 <span className={s.eq}>
@@ -96,8 +94,8 @@ export default function HomeClient() {
 
       <Marquee />
 
-      {/* ── 2. SHOWS ── */}
-      <section className={s.section} id="shows">
+      {/* ── 2. SHOWS — left aligned to match widget ── */}
+      <section className={s.showsSection} id="shows">
         <span className="eyebrow reveal" data-delay="0">Live</span>
         <h2 className="sec-title reveal" data-delay="80">Shows</h2>
         <div className={`${s.ticketWrap} reveal`} data-delay="160">
@@ -118,7 +116,7 @@ export default function HomeClient() {
 
       <div className="purple-rule" />
 
-      {/* ── 3. PHOTO BREAK — Ken Burns zoom ── */}
+      {/* ── 3. PHOTO BREAK — Ken Burns + ghost text ── */}
       <div className={s.photoBreak}>
         <Image
           src="/photos/background-larger.png"
@@ -128,6 +126,9 @@ export default function HomeClient() {
           sizes="100vw"
         />
         <div className={s.photoBreakOverlay} />
+        <div className={s.photoBreakText}>
+          <span className={s.photoBreakGhost}>Dizzy Izzy</span>
+        </div>
       </div>
 
       {/* ── 4. MERCH ── */}
@@ -185,9 +186,18 @@ export default function HomeClient() {
         <div className={`${s.emailContent} reveal`} data-delay="0">
           <span className="eyebrow">Stay in the loop</span>
           <h2 className="sec-title">Join<br />the list</h2>
-          <div className={s.emailInputWrap} title="Coming soon">
-            <input className={s.emailInput} type="email" placeholder="Coming soon" disabled readOnly />
-            <button className={s.emailBtn} disabled>Subscribe</button>
+          <div className={s.emailInputWrap}>
+            <p className={s.emailComingSoon}>Email list coming soon</p>
+            <div className={s.emailRow}>
+              <input
+                className={s.emailInput}
+                type="email"
+                placeholder="your@email.com"
+                disabled
+                readOnly
+              />
+              <button className={s.emailBtn} disabled>Subscribe</button>
+            </div>
           </div>
           <p className={s.emailNote}>Show announcements and new music only.</p>
         </div>

@@ -13,6 +13,18 @@
   object-fit: cover;
   object-position: 50% 10%;
   filter: brightness(0.58) saturate(0.8);
+  animation: heroBreathe 10s ease-in-out infinite alternate, heroZoom 40s ease-in-out infinite alternate;
+  transform-origin: center center;
+}
+
+@keyframes heroBreathe {
+  from { filter: brightness(0.55) saturate(0.8); }
+  to   { filter: brightness(0.62) saturate(0.82); }
+}
+
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06); }
 }
 
 .heroColorGrade {
@@ -137,7 +149,7 @@
 /* ── DARK EYES RELEASE ────────────────────────────── */
 .release {
   position: absolute;
-  bottom: 52px;
+  bottom: 120px;
   right: 52px;
   z-index: 2;
   display: flex;
@@ -153,7 +165,7 @@
   font-weight: 500;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(237,232,245,0.5);
+  color: rgba(237,232,245,0.7);
 }
 
 /* Card layout: cover left, info right */
@@ -303,15 +315,26 @@
 
 /* ── SECTIONS ─────────────────────────────────────── */
 .section {
-  padding: 88px 64px;
+  padding: 100px 64px;
   margin-left: var(--sidebar-w);
   text-align: center;
+  scroll-margin-top: 32px;
+}
+
+/* Shows section — left-align content to match widget */
+.showsSection {
+  padding: 100px 64px;
+  margin-left: var(--sidebar-w);
+  text-align: left;
+  scroll-margin-top: 32px;
 }
 
 .ticketWrap {
-  text-align: left;
   margin-bottom: 0;
   min-height: 180px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  padding: 32px;
 }
 
 /* Force Ticket Tailor text readable on dark bg */
@@ -325,7 +348,7 @@
 /* ── PHOTO BREAK — Ken Burns slow zoom ───────────── */
 .photoBreak {
   position: relative;
-  height: 420px;
+  height: clamp(280px, 30vw, 420px);
   overflow: hidden;
   width: 100%;
 }
@@ -349,17 +372,39 @@
   background: linear-gradient(to bottom, rgba(8,5,14,0.65) 0%, transparent 25%, transparent 75%, rgba(8,5,14,0.65) 100%);
 }
 
+/* Ghost text overlay on photo break */
+.photoBreakText {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.photoBreakGhost {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(4rem, 12vw, 10rem);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(237,232,245,0.08);
+  user-select: none;
+}
+
 /* ── MERCH SCROLL ─────────────────────────────────── */
 .merchScroll {
   display: flex;
   gap: 16px;
   overflow-x: auto;
   padding-bottom: 16px;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   scrollbar-width: thin;
   scrollbar-color: var(--purple-dim) transparent;
   -webkit-overflow-scrolling: touch;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .merchScroll::-webkit-scrollbar { height: 2px; }
 .merchScroll::-webkit-scrollbar-track { background: transparent; }
@@ -430,10 +475,11 @@
 /* ── EMAIL ────────────────────────────────────────── */
 .emailSection {
   position: relative;
-  padding: 100px 64px;
+  padding: 120px 64px;
   margin-left: var(--sidebar-w);
   overflow: hidden;
   text-align: center;
+  scroll-margin-top: 32px;
 }
 
 .emailGallery {
@@ -465,10 +511,33 @@
   margin: 0 auto;
 }
 
+/* Override eyebrow size inside email section for readability over photos */
+.emailContent .eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+}
+
 .emailInputWrap {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.emailComingSoon {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 4px;
+}
+
+.emailRow {
+  display: flex;
   max-width: 400px;
-  margin: 0 auto;
+  width: 100%;
   cursor: not-allowed;
 }
 
@@ -478,14 +547,13 @@
   background: rgba(255,255,255,0.04);
   border: 1px solid var(--border-hi);
   border-right: none;
-  color: var(--faint);
+  color: rgba(237,232,245,0.3);
   font-family: var(--font-body);
   font-size: 11px;
   outline: none;
   cursor: not-allowed;
-  font-style: italic;
 }
-.emailInput::placeholder { color: var(--faint); }
+.emailInput::placeholder { color: rgba(237,232,245,0.3); }
 
 .emailBtn {
   padding: 13px 22px;
@@ -512,14 +580,16 @@
 /* ── RESPONSIVE ───────────────────────────────────── */
 @media (max-width: 768px) {
   .heroTitle { left: 24px; bottom: 32px; }
-  .release { right: 24px; bottom: 32px; }
+  .release { right: 24px; bottom: 80px; }
   .releaseCard { flex-direction: column; align-items: flex-end; }
   .releaseCoverWrap { width: 70px; height: 70px; }
   .releaseCover { width: 70px; height: 70px; }
   .releaseTrack { font-size: 16px; }
   .section { padding: 64px 24px; margin-left: 0; }
+  .showsSection { padding: 64px 24px; margin-left: 0; }
   .emailSection { padding: 80px 24px; margin-left: 0; }
   .emailGallery { grid-template-columns: repeat(2, 1fr); }
   .izzyWrap { height: clamp(4rem, 14vw, 12rem); }
   .merchScroll { justify-content: flex-start; }
+  .photoBreakGhost { display: none; }
 }
