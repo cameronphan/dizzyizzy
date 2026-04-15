@@ -160,11 +160,11 @@
 .releaseCard {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
   background: rgba(8,5,14,0.6);
   border: 1px solid rgba(155,109,255,0.25);
   backdrop-filter: blur(16px);
-  padding: 14px 18px;
+  padding: 20px 24px;
 }
 
 /* ── PULSING COVER ART ────────────────────────────── */
@@ -172,31 +172,31 @@
   position: relative;
   flex-shrink: 0;
   display: block;
-  width: 90px;
-  height: 90px;
+  width: 180px;
+  height: 180px;
 }
 
 /* Glow ring that pulses behind the cover */
 .coverGlow {
   position: absolute;
-  inset: -6px;
+  inset: -12px;
   border-radius: 2px;
-  background: radial-gradient(ellipse at center, rgba(155,109,255,0.45) 0%, transparent 70%);
-  animation: coverPulse 3s ease-in-out infinite;
+  background: radial-gradient(ellipse at center, rgba(155,109,255,0.6) 0%, rgba(155,109,255,0.2) 50%, transparent 75%);
+  animation: coverPulse 2.5s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
 }
 
 @keyframes coverPulse {
-  0%, 100% { opacity: 0.4; transform: scale(0.95); }
-  50%       { opacity: 1;   transform: scale(1.08); }
+  0%, 100% { opacity: 0.35; transform: scale(0.92); }
+  50%       { opacity: 1;    transform: scale(1.1); }
 }
 
 .releaseCover {
   position: relative;
   z-index: 1;
-  width: 90px;
-  height: 90px;
+  width: 180px;
+  height: 180px;
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
@@ -207,36 +207,36 @@
 .releaseInfo {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  min-width: 120px;
+  gap: 6px;
+  min-width: 160px;
 }
 
 /* NOW PLAYING — animated equalizer bars */
 .nowPlaying {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   margin-bottom: 2px;
 }
 
 .eq {
   display: flex;
   align-items: flex-end;
-  gap: 2px;
-  height: 12px;
+  gap: 3px;
+  height: 16px;
 }
 
 .bar {
   display: block;
-  width: 2px;
+  width: 3px;
   background: var(--purple);
   border-radius: 1px;
   animation: eqBounce 1.2s ease-in-out infinite;
 }
-.bar:nth-child(1) { height: 6px;  animation-delay: 0s; }
-.bar:nth-child(2) { height: 10px; animation-delay: 0.15s; }
-.bar:nth-child(3) { height: 8px;  animation-delay: 0.3s; }
-.bar:nth-child(4) { height: 12px; animation-delay: 0.45s; }
+.bar:nth-child(1) { height: 8px;  animation-delay: 0s; }
+.bar:nth-child(2) { height: 14px; animation-delay: 0.15s; }
+.bar:nth-child(3) { height: 10px; animation-delay: 0.3s; }
+.bar:nth-child(4) { height: 16px; animation-delay: 0.45s; }
 
 @keyframes eqBounce {
   0%, 100% { transform: scaleY(0.4); }
@@ -245,7 +245,7 @@
 
 .nowPlayingText {
   font-family: var(--font-body);
-  font-size: 7px;
+  font-size: 9px;
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -255,7 +255,7 @@
 .releaseTrack {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 20px;
+  font-size: 32px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--cream);
@@ -265,31 +265,31 @@
 
 .releaseArtist {
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 400;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(237,232,245,0.45);
+  color: rgba(237,232,245,0.5);
   display: block;
 }
 
 /* ── STREAMING BUTTONS ────────────────────────────── */
 .streamIcons {
   display: flex;
-  gap: 6px;
-  margin-top: 6px;
+  gap: 8px;
+  margin-top: 8px;
 }
 
 .streamBtn {
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 5px 10px;
+  gap: 7px;
+  padding: 8px 14px;
   border: 1px solid var(--border-hi);
   background: rgba(8,5,14,0.5);
   color: var(--muted);
   font-family: var(--font-body);
-  font-size: 7px;
+  font-size: 9px;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;

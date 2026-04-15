@@ -49,8 +49,8 @@ export default function HomeClient() {
               <Image
                 src="/photos/dark-eyes-cover.png"
                 alt="Dark Eyes"
-                width={160}
-                height={160}
+                width={180}
+                height={180}
                 className={s.releaseCover}
               />
             </a>
