@@ -9,8 +9,9 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 36px 0 36px 28px;
-  background: transparent;
   pointer-events: all;
+  /* Subtle dark gradient left to right — gives sidebar distinction without a hard edge */
+  background: linear-gradient(to right, rgba(4,3,10,0.72) 0%, rgba(4,3,10,0.35) 60%, transparent 100%);
 }
 
 /* LOGO — wordmark with purple left border */

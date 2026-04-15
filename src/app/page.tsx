@@ -144,9 +144,16 @@ export default function Home() {
       {/* ── 5. EMAIL ── */}
       <section className={s.emailSection}>
         <div className={s.emailGallery}>
-          {['/photos/B-Dark-Eyes-12.png','/photos/C-Dark-Eyes-13_result.jpg','/photos/B-Dark-Eyes-13.png','/photos/C-Dark-Eyes-11_result.jpg'].map((src, i) => (
+          {[
+            '/photos/B-Dark-Eyes-12.png',
+            '/photos/C-Dark-Eyes-13_result.jpg',
+            '/photos/B-Dark-Eyes-13.png',
+            '/photos/C-Dark-Eyes-11_result.jpg',
+            '/photos/B_Dark_Eyes-14_result.jpg',
+            '/photos/B_Dark_Eyes-5_result.jpg',
+          ].map((src, i) => (
             <div key={i} className={s.emailGalleryItem}>
-              <Image src={src} alt="" fill className={s.emailGalleryImg} sizes="25vw" />
+              <Image src={src} alt="" fill className={s.emailGalleryImg} sizes="16vw" />
             </div>
           ))}
         </div>

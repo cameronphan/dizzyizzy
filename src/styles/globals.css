@@ -100,7 +100,7 @@ body::after {
   min-width: 0;
 }
 
-/* SECTION — left margin accounts for fixed sidebar, content centers in remaining space */
+/* SECTION — left margin accounts for fixed sidebar */
 .section {
   padding: 88px 64px 88px 64px;
   margin-left: var(--sidebar-w);

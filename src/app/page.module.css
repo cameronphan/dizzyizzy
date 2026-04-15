@@ -261,7 +261,8 @@
 
 /* ── SECTIONS ─────────────────────────────────────── */
 .section {
-  padding: 88px 64px 88px calc(var(--sidebar-w) + 48px);
+  padding: 88px 64px;
+  margin-left: var(--sidebar-w);
   text-align: center;
 }
 
@@ -289,8 +290,7 @@
   scrollbar-width: thin;
   scrollbar-color: var(--purple-dim) transparent;
   -webkit-overflow-scrolling: touch;
-  justify-content: flex-start;
-  text-align: left;
+  justify-content: center;
 }
 .merchScroll::-webkit-scrollbar { height: 2px; }
 .merchScroll::-webkit-scrollbar-track { background: transparent; }
@@ -391,7 +391,7 @@
   position: absolute;
   inset: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 2px;
 }
 
@@ -500,7 +500,7 @@
   .releaseTrack { font-size: 16px; }
   .section { padding: 64px 24px; }
   .emailSection { padding: 80px 24px; }
-  .emailGallery { grid-template-columns: repeat(2,1fr); }
+  .emailGallery { grid-template-columns: repeat(3,1fr); }
   .footer { padding: 20px 24px; }
   .izzyWrap { height: clamp(4rem, 14vw, 12rem); }
 }
