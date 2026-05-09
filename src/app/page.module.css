@@ -323,31 +323,181 @@
 }
 .ticketWrap :global(a) { color: var(--purple) !important; }
 
-/* ── PHOTO BREAK — Ken Burns slow zoom ───────────── */
-.photoBreak {
+/* ── NOW PLAYING BANNER ───────────────────────────── */
+.nowPlayingBanner {
   position: relative;
-  height: 420px;
   overflow: hidden;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+}
+
+.nowPlayingBannerBg {
+  object-fit: cover;
+  object-position: center 25%;
+  filter: brightness(0.28) saturate(0.6);
+}
+
+.nowPlayingBannerOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(8,5,14,0.7) 0%, transparent 30%, transparent 70%, rgba(8,5,14,0.7) 100%),
+    linear-gradient(to right, rgba(155,109,255,0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.nowPlayingBannerContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding: 56px 64px;
+  margin-left: var(--sidebar-w);
   width: 100%;
 }
 
-.photoBreakImg {
-  object-fit: cover;
-  object-position: center 30%;
-  filter: brightness(0.58) saturate(0.85);
-  animation: kenBurns 18s ease-in-out infinite alternate;
-  transform-origin: center center;
+.nowPlayingCover {
+  flex-shrink: 0;
+  position: relative;
+  width: 140px;
+  height: 140px;
 }
 
-@keyframes kenBurns {
-  from { transform: scale(1);    object-position: center 25%; }
-  to   { transform: scale(1.08); object-position: center 35%; }
-}
-
-.photoBreakOverlay {
+.nowPlayingCoverGlow {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(8,5,14,0.65) 0%, transparent 25%, transparent 75%, rgba(8,5,14,0.65) 100%);
+  inset: -14px;
+  background: radial-gradient(ellipse at center, rgba(155,109,255,0.5) 0%, transparent 70%);
+  animation: coverPulse 2.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.nowPlayingCoverImg {
+  position: relative;
+  z-index: 1;
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.nowPlayingCover:hover .nowPlayingCoverImg { transform: scale(1.03); }
+
+.nowPlayingMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.nowPlayingEyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.nowPlayingEq {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 14px;
+}
+
+.nowPlayingEqBar {
+  display: block;
+  width: 3px;
+  background: var(--purple);
+  border-radius: 1px;
+  animation: eqBounce 1.2s ease-in-out infinite;
+}
+.nowPlayingEqBar:nth-child(1) { height: 7px;  animation-delay: 0s; }
+.nowPlayingEqBar:nth-child(2) { height: 12px; animation-delay: 0.15s; }
+.nowPlayingEqBar:nth-child(3) { height: 9px;  animation-delay: 0.3s; }
+.nowPlayingEqBar:nth-child(4) { height: 14px; animation-delay: 0.45s; }
+
+.nowPlayingTag {
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+
+.nowPlayingTagline {
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(237,232,245,0.35);
+  border: 1px solid rgba(155,109,255,0.25);
+  padding: 3px 10px;
+  align-self: flex-start;
+  margin-bottom: 4px;
+}
+
+.nowPlayingTrack {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  text-transform: uppercase;
+  color: var(--cream);
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+}
+
+.nowPlayingArtist {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(237,232,245,0.45);
+  margin-top: 4px;
+}
+
+.nowPlayingAlbum {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  color: rgba(237,232,245,0.25);
+  margin-top: 2px;
+}
+
+.nowPlayingButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.nowPlayingBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: 1px solid var(--border-hi);
+  background: rgba(8,5,14,0.6);
+  backdrop-filter: blur(8px);
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.nowPlayingBtn:hover {
+  border-color: var(--purple);
+  color: var(--cream);
+  background: rgba(155,109,255,0.08);
 }
 
 /* ── MERCH SCROLL ─────────────────────────────────── */
@@ -537,5 +687,8 @@
   .emailSection { padding: 80px 24px; margin-left: 0; }
   .emailGallery { grid-template-columns: repeat(2, 1fr); }
   .izzyWrap { height: clamp(4rem, 14vw, 12rem); }
-  .merchScroll { justify-content: flex-start; gap: 32px; }
+  .nowPlayingBannerContent { flex-direction: column; align-items: flex-start; gap: 28px; padding: 40px 24px; margin-left: 0; }
+  .nowPlayingCover { width: 100px; height: 100px; }
+  .nowPlayingCoverImg { width: 100px; height: 100px; }
+  .nowPlayingButtons { flex-wrap: wrap; }
 }
