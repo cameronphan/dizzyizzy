@@ -389,12 +389,14 @@
 
 .merchShirt {
   width: 100%;
-  height: 130px;
+  height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 1;
   transition: opacity 0.3s;
+  overflow: hidden;
+  position: relative;
 }
 .merchItem:hover .merchShirt { opacity: 0.85; }
 

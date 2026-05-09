@@ -146,9 +146,8 @@ export default function HomeClient() {
                 <Image
                   src={item.img}
                   alt={item.label}
-                  width={150}
-                  height={150}
-                  style={{ objectFit: 'contain', width: '100%', height: '100%' }}
+                  fill
+                  style={{ objectFit: 'cover' }}
                 />
               </div>
               <span className={s.merchItemLabel}>{item.label}</span>
