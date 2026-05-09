@@ -539,5 +539,3 @@
   .izzyWrap { height: clamp(4rem, 14vw, 12rem); }
   .merchScroll { justify-content: flex-start; gap: 32px; }
 }
-  .nowPlayingButtons { flex-wrap: wrap; }
-}
