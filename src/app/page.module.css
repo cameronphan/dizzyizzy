@@ -368,17 +368,18 @@
 
 .merchItem {
   flex-shrink: 0;
-  width: 190px;
+  width: 220px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
   border: 1px solid var(--border);
-  padding: 24px 16px 20px;
+  padding: 0 0 20px;
   background: var(--surface);
   transition: border-color 0.3s, box-shadow 0.3s;
   cursor: crosshair;
   position: relative;
+  overflow: hidden;
 }
 
 /* Purple glow on hover */
@@ -389,10 +390,8 @@
 
 .merchShirt {
   width: 100%;
-  height: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 240px;
+  display: block;
   opacity: 1;
   transition: opacity 0.3s;
   overflow: hidden;
@@ -408,6 +407,7 @@
   color: var(--very-faint);
   text-align: center;
   transition: color 0.3s;
+  padding: 0 16px;
 }
 .merchItem:hover .merchItemLabel { color: var(--faint); }
 
@@ -417,6 +417,7 @@
   letter-spacing: 0.1em;
   color: var(--faint);
   text-align: center;
+  padding: 0 16px;
 }
 
 .merchCta {
