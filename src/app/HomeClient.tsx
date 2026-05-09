@@ -136,10 +136,10 @@ export default function HomeClient() {
         <h2 className="sec-title reveal" data-delay="80">Merch</h2>
         <div className={`${s.merchScroll} reveal`} data-delay="160">
           {[
-            { label: 'Classic Tee',    img: '/photos/merch_1.jpg' },
-            { label: 'Dark Eyes Tee',  img: '/photos/merch_2.jpg' },
-            { label: 'Hoodie',         img: '/photos/merch_3.jpg' },
-            { label: 'Cap',            img: '/photos/merch_4.jpg' },
+            { label: 'Black Tee',     img: '/photos/merch_1.jpg' },
+            { label: 'Classic Tee',   img: '/photos/merch_2.jpg' },
+            { label: 'Rugby Shirt',   img: '/photos/merch_3.jpg' },
+            { label: 'Long Sleeve',   img: '/photos/merch_4.jpg' },
           ].map((item) => (
             <div key={item.label} className={s.merchItem}>
               <div className={s.merchShirt}>
