@@ -308,10 +308,17 @@
   text-align: center;
 }
 
+/* ── TICKET WIDGET ────────────────────────────────── */
 .ticketWrap {
   text-align: left;
   margin-bottom: 0;
-  min-height: 180px;
+  min-height: 600px;
+}
+
+.ticketWrap :global(iframe) {
+  width: 100% !important;
+  min-height: 600px !important;
+  height: 600px !important;
 }
 
 /* Force Ticket Tailor text readable on dark bg */
@@ -522,4 +529,6 @@
   .emailGallery { grid-template-columns: repeat(2, 1fr); }
   .izzyWrap { height: clamp(4rem, 14vw, 12rem); }
   .merchScroll { justify-content: flex-start; }
+  .ticketWrap { min-height: 400px; }
+  .ticketWrap :global(iframe) { min-height: 400px !important; height: 400px !important; }
 }
