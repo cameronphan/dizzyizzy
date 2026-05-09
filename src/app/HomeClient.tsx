@@ -136,18 +136,20 @@ export default function HomeClient() {
         <h2 className="sec-title reveal" data-delay="80">Merch</h2>
         <div className={`${s.merchScroll} reveal`} data-delay="160">
           {[
-            { label: 'Classic Tee' },
-            { label: 'Dark Eyes Tee' },
-            { label: 'Hoodie' },
-            { label: 'Cap' },
-            { label: 'Tote Bag' },
-            { label: 'Long Sleeve' },
+            { label: 'Classic Tee',    img: '/photos/merch_1.jpg' },
+            { label: 'Dark Eyes Tee',  img: '/photos/merch_2.jpg' },
+            { label: 'Hoodie',         img: '/photos/merch_3.jpg' },
+            { label: 'Cap',            img: '/photos/merch_4.jpg' },
           ].map((item) => (
             <div key={item.label} className={s.merchItem}>
               <div className={s.merchShirt}>
-                <svg viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 90, height: 90 }}>
-                  <path d="M30 5 L15 20 L0 15 L10 40 L20 40 L20 85 L80 85 L80 40 L90 40 L100 15 L85 20 L70 5 Q62 12 50 12 Q38 12 30 5Z" fill="rgba(237,232,245,1)" />
-                </svg>
+                <Image
+                  src={item.img}
+                  alt={item.label}
+                  width={150}
+                  height={150}
+                  style={{ objectFit: 'contain', width: '100%', height: '100%' }}
+                />
               </div>
               <span className={s.merchItemLabel}>{item.label}</span>
               <span className={s.merchItemPrice}>Coming Soon</span>

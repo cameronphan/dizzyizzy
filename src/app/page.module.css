@@ -393,10 +393,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.22;
+  opacity: 1;
   transition: opacity 0.3s;
 }
-.merchItem:hover .merchShirt { opacity: 0.38; }
+.merchItem:hover .merchShirt { opacity: 0.85; }
 
 .merchItemLabel {
   font-size: 8px;
