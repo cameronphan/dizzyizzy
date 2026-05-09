@@ -353,71 +353,68 @@
 /* ── MERCH SCROLL ─────────────────────────────────── */
 .merchScroll {
   display: flex;
-  gap: 16px;
+  gap: 48px;
   overflow-x: auto;
   padding-bottom: 16px;
-  margin-bottom: 2rem;
-  scrollbar-width: thin;
-  scrollbar-color: var(--purple-dim) transparent;
+  margin-bottom: 2.5rem;
+  scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   justify-content: center;
+  align-items: flex-end;
 }
-.merchScroll::-webkit-scrollbar { height: 2px; }
-.merchScroll::-webkit-scrollbar-track { background: transparent; }
-.merchScroll::-webkit-scrollbar-thumb { background: var(--purple-dim); }
+.merchScroll::-webkit-scrollbar { display: none; }
 
 .merchItem {
   flex-shrink: 0;
-  width: 220px;
+  width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  border: 1px solid var(--border);
-  padding: 0 0 20px;
-  background: var(--surface);
-  transition: border-color 0.3s, box-shadow 0.3s;
+  gap: 16px;
+  background: none;
+  border: none;
+  padding: 0;
   cursor: crosshair;
   position: relative;
-  overflow: hidden;
+  transition: transform 0.4s ease;
 }
 
-/* Purple glow on hover */
 .merchItem:hover {
-  border-color: rgba(155,109,255,0.5);
-  box-shadow: 0 0 24px rgba(155,109,255,0.12), inset 0 0 24px rgba(155,109,255,0.04);
+  transform: translateY(-6px);
 }
 
 .merchShirt {
   width: 100%;
   height: 240px;
   display: block;
-  opacity: 1;
-  transition: opacity 0.3s;
-  overflow: hidden;
   position: relative;
+  transition: transform 0.4s ease;
 }
-.merchItem:hover .merchShirt { opacity: 0.85; }
+
+/* This is the magic — blends white bg away */
+.merchShirt img {
+  mix-blend-mode: multiply !important;
+  filter: brightness(0.82) contrast(1.05) !important;
+}
 
 .merchItemLabel {
   font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+  font-weight: 500;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--very-faint);
+  color: var(--faint);
   text-align: center;
   transition: color 0.3s;
-  padding: 0 16px;
 }
-.merchItem:hover .merchItemLabel { color: var(--faint); }
+.merchItem:hover .merchItemLabel { color: var(--purple); }
 
 .merchItemPrice {
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 300;
   letter-spacing: 0.1em;
-  color: var(--faint);
+  color: var(--very-faint);
   text-align: center;
-  padding: 0 16px;
+  margin-top: -8px;
 }
 
 .merchCta {
@@ -525,5 +522,5 @@
   .emailSection { padding: 80px 24px; margin-left: 0; }
   .emailGallery { grid-template-columns: repeat(2, 1fr); }
   .izzyWrap { height: clamp(4rem, 14vw, 12rem); }
-  .merchScroll { justify-content: flex-start; }
+  .merchScroll { justify-content: flex-start; gap: 32px; }
 }

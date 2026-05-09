@@ -147,7 +147,7 @@ export default function HomeClient() {
                   src={item.img}
                   alt={item.label}
                   fill
-                  style={{ objectFit: 'cover' }}
+                  style={{ objectFit: 'contain', mixBlendMode: 'multiply', filter: 'brightness(0.82) contrast(1.05)' }}
                 />
               </div>
               <span className={s.merchItemLabel}>{item.label}</span>
