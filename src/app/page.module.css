@@ -96,6 +96,10 @@
   letter-spacing: -0.01em;
   position: absolute;
   top: 0; left: 0;
+  /* Static base stroke so it's always visible — iOS Safari can't animate
+     -webkit-text-stroke reliably inside keyframes, so we animate only
+     the fill and let the stroke pulse via opacity on izzy1/izzy2 */
+  -webkit-text-stroke: 1.5px #9b6dff;
   animation: vhsMain 3.2s ease-in-out infinite;
 }
 
@@ -117,19 +121,19 @@
   100% { -webkit-text-stroke: 1px rgba(255,0,200,0.5);   transform: translateX(4px); opacity: 0.4; }
 }
 
-/* vhsMain uses -webkit-text-fill-color instead of color —
-   Safari on iOS does not reliably animate the color property
-   on elements that also have -webkit-text-stroke set */
+/* vhsMain — only animates fill color, not stroke.
+   iOS Safari freezes -webkit-text-stroke when animated inside keyframes,
+   so the stroke is set statically on .izzy3 above and only the fill cycles. */
 @keyframes vhsMain {
-  0%   { -webkit-text-fill-color: transparent;              -webkit-text-stroke: 1.5px #9b6dff; }
-  12%  { -webkit-text-fill-color: rgba(237,232,245,0.9);    -webkit-text-stroke: 1.5px #9b6dff; }
-  24%  { -webkit-text-fill-color: transparent;              -webkit-text-stroke: 1.5px #00ffcc; }
-  36%  { -webkit-text-fill-color: rgba(155,109,255,0.7);    -webkit-text-stroke: 1.5px #ff00cc; }
-  48%  { -webkit-text-fill-color: transparent;              -webkit-text-stroke: 1.5px #ffff00; }
-  60%  { -webkit-text-fill-color: rgba(0,255,200,0.6);      -webkit-text-stroke: 1.5px #ff3300; }
-  72%  { -webkit-text-fill-color: transparent;              -webkit-text-stroke: 1.5px #cc00ff; }
-  84%  { -webkit-text-fill-color: rgba(255,200,255,0.5);    -webkit-text-stroke: 1.5px #00ccff; }
-  100% { -webkit-text-fill-color: transparent;              -webkit-text-stroke: 1.5px #9b6dff; }
+  0%   { -webkit-text-fill-color: transparent; }
+  12%  { -webkit-text-fill-color: rgba(237,232,245,0.9); }
+  24%  { -webkit-text-fill-color: transparent; }
+  36%  { -webkit-text-fill-color: rgba(155,109,255,0.7); }
+  48%  { -webkit-text-fill-color: transparent; }
+  60%  { -webkit-text-fill-color: rgba(0,255,200,0.6); }
+  72%  { -webkit-text-fill-color: transparent; }
+  84%  { -webkit-text-fill-color: rgba(255,200,255,0.5); }
+  100% { -webkit-text-fill-color: transparent; }
 }
 
 @keyframes fadeUp {
@@ -564,6 +568,8 @@
     bottom: 110px;
     line-height: 0.85;
     overflow: visible;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     text-align: center;
   }
@@ -573,16 +579,21 @@
     font-size: clamp(4.8rem, 23vw, 6.5rem);
   }
 
-  /* izzyWrap height must match t1 font size exactly */
+  /* izzyWrap height must match t1 font size exactly — no margin so it stays centered */
   .izzyWrap {
     height: clamp(4.8rem, 23vw, 6.5rem);
     margin-left: 0;
+    margin-right: 0;
     overflow: visible;
+    display: flex;
+    justify-content: center;
   }
 
-  /* All three glitch layers same size as Dizzy */
+  /* All three glitch layers same size as Dizzy, centered */
   .izzy1, .izzy2, .izzy3 {
     font-size: clamp(4.8rem, 23vw, 6.5rem);
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   /* ── RELEASE CARD — full-width now-playing bar at bottom of hero ── */
