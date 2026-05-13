@@ -156,6 +156,7 @@
   color: rgba(237,232,245,0.5);
 }
 
+/* Card layout: cover left, info right */
 .releaseCard {
   display: flex;
   align-items: center;
@@ -175,6 +176,7 @@
   height: 180px;
 }
 
+/* Glow ring that pulses behind the cover */
 .coverGlow {
   position: absolute;
   inset: -12px;
@@ -209,6 +211,7 @@
   min-width: 160px;
 }
 
+/* NOW PLAYING — animated equalizer bars */
 .nowPlaying {
   display: flex;
   align-items: center;
@@ -312,6 +315,7 @@
   min-height: 180px;
 }
 
+/* Force Ticket Tailor text readable on dark bg */
 .ticketWrap :global(.tt-widget),
 .ticketWrap :global(.tt-widget *) {
   color: var(--cream) !important;
@@ -379,6 +383,7 @@
   transform: translateY(-8px);
 }
 
+/* Stagger — even items sit lower */
 .merchItem:nth-child(even) {
   margin-bottom: 40px;
 }
@@ -391,6 +396,7 @@
   transition: transform 0.4s ease;
 }
 
+/* Dark blend + purple tint via pseudo element */
 .merchShirt::after {
   content: '';
   position: absolute;
