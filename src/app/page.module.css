@@ -117,16 +117,19 @@
   100% { -webkit-text-stroke: 1px rgba(255,0,200,0.5);   transform: translateX(4px); opacity: 0.4; }
 }
 
+/* vhsMain uses -webkit-text-fill-color instead of color —
+   Safari on iOS does not reliably animate the color property
+   on elements that also have -webkit-text-stroke set */
 @keyframes vhsMain {
-  0%   { color: transparent;               -webkit-text-stroke: 1.5px #9b6dff; }
-  12%  { color: rgba(237,232,245,0.9);     -webkit-text-stroke: 1.5px #9b6dff; }
-  24%  { color: transparent;               -webkit-text-stroke: 1.5px #00ffcc; }
-  36%  { color: rgba(155,109,255,0.7);     -webkit-text-stroke: 1.5px #ff00cc; }
-  48%  { color: transparent;               -webkit-text-stroke: 1.5px #ffff00; }
-  60%  { color: rgba(0,255,200,0.6);       -webkit-text-stroke: 1.5px #ff3300; }
-  72%  { color: transparent;               -webkit-text-stroke: 1.5px #cc00ff; }
-  84%  { color: rgba(255,200,255,0.5);     -webkit-text-stroke: 1.5px #00ccff; }
-  100% { color: transparent;               -webkit-text-stroke: 1.5px #9b6dff; }
+  0%   { -webkit-text-fill-color: transparent;              -webkit-text-stroke: 1.5px #9b6dff; }
+  12%  { -webkit-text-fill-color: rgba(237,232,245,0.9);    -webkit-text-stroke: 1.5px #9b6dff; }
+  24%  { -webkit-text-fill-color: transparent;              -webkit-text-stroke: 1.5px #00ffcc; }
+  36%  { -webkit-text-fill-color: rgba(155,109,255,0.7);    -webkit-text-stroke: 1.5px #ff00cc; }
+  48%  { -webkit-text-fill-color: transparent;              -webkit-text-stroke: 1.5px #ffff00; }
+  60%  { -webkit-text-fill-color: rgba(0,255,200,0.6);      -webkit-text-stroke: 1.5px #ff3300; }
+  72%  { -webkit-text-fill-color: transparent;              -webkit-text-stroke: 1.5px #cc00ff; }
+  84%  { -webkit-text-fill-color: rgba(255,200,255,0.5);    -webkit-text-stroke: 1.5px #00ccff; }
+  100% { -webkit-text-fill-color: transparent;              -webkit-text-stroke: 1.5px #9b6dff; }
 }
 
 @keyframes fadeUp {
@@ -544,35 +547,38 @@
     min-height: 100svh;
     padding-bottom: 0;
     align-items: flex-end;
-    overflow: visible; /* allow now-playing bar to sit below */
+    overflow: visible;
   }
 
+  /* Shift image so subject fills the frame better —
+     center 30% shows more of the upper body, less dead sky */
   .heroBg {
-    object-position: 60% center;
+    object-position: center 30%;
   }
 
-  /* Title sits in the middle of the hero with room for bar below */
+  /* Title sits lower third of screen, clear of subject's face */
   .heroTitle {
     left: 24px;
-    bottom: 100px;
+    bottom: 110px;
     line-height: 0.85;
-    overflow: visible; /* critical — don't clip the glitch layers */
+    overflow: visible;
   }
 
+  /* Both Dizzy and Izzy same size — fill ~90% of screen width */
   .t1 {
-    font-size: clamp(4.5rem, 22vw, 6rem);
+    font-size: clamp(4.8rem, 23vw, 6.5rem);
   }
 
-  /* izzyWrap must be tall enough to not clip the absolute glitch spans */
+  /* izzyWrap height must match t1 font size exactly */
   .izzyWrap {
-    height: clamp(4.5rem, 22vw, 6rem);
+    height: clamp(4.8rem, 23vw, 6.5rem);
     margin-left: 0;
-    overflow: visible; /* critical — glitch layers extend slightly outside bounds */
+    overflow: visible;
   }
 
-  /* All three Izzy layers match Dizzy size */
+  /* All three glitch layers same size as Dizzy */
   .izzy1, .izzy2, .izzy3 {
-    font-size: clamp(4.5rem, 22vw, 6rem);
+    font-size: clamp(4.8rem, 23vw, 6.5rem);
   }
 
   /* ── RELEASE CARD — full-width now-playing bar at bottom of hero ── */
@@ -584,12 +590,10 @@
     align-items: stretch;
     gap: 0;
     padding: 0;
-    animation: none; /* avoid layout jump on mobile */
+    animation: none;
   }
 
-  .releaseLabel {
-    display: none;
-  }
+  .releaseLabel { display: none; }
 
   .releaseCard {
     flex-direction: row;
@@ -652,23 +656,18 @@
   }
 
   /* ── PHOTO BREAK ── */
-  .photoBreak {
-    height: 300px;
-  }
+  .photoBreak { height: 300px; }
 
   /* ── MERCH — snap scroll, starts at first card ── */
   .merchScroll {
     justify-content: flex-start;
-    align-items: flex-start; /* consistent top alignment, no stagger */
+    align-items: flex-start;
     gap: 16px;
     padding-left: 24px;
     padding-right: 24px;
-    /* Negative margin so scroll bleeds edge to edge */
     margin-left: -24px;
     margin-right: -24px;
-    /* iOS native snap scrolling */
     scroll-snap-type: x mandatory;
-    /* Start scroll at the very beginning */
     scroll-padding-left: 24px;
   }
 
@@ -676,26 +675,13 @@
     width: 75vw;
     max-width: 290px;
     scroll-snap-align: start;
-    /* Override desktop stagger — would break snap scroll on mobile */
     margin-bottom: 0 !important;
-    /* Ensure label stays attached to card */
     flex-shrink: 0;
   }
 
-  .merchShirt {
-    height: 280px;
-    width: 100%;
-  }
-
-  .merchItemLabel {
-    font-size: 11px;
-    margin-top: 4px;
-  }
-
-  .merchItemPrice {
-    font-size: 11px;
-    margin-top: 2px;
-  }
+  .merchShirt { height: 280px; width: 100%; }
+  .merchItemLabel { font-size: 11px; margin-top: 4px; }
+  .merchItemPrice { font-size: 11px; margin-top: 2px; }
 
   /* ── EMAIL ── */
   .emailSection {
@@ -703,18 +689,7 @@
     margin-left: 0;
   }
 
-  .emailGallery {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .emailInputWrap {
-    max-width: 100%;
-  }
-
-  /* Subscribe button — fix purple overflow on mobile */
-  .emailBtn {
-    opacity: 0.5;
-    flex-shrink: 0;
-  }
-
+  .emailGallery { grid-template-columns: repeat(2, 1fr); }
+  .emailInputWrap { max-width: 100%; }
+  .emailBtn { opacity: 0.5; flex-shrink: 0; }
 }
