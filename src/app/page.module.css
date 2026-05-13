@@ -435,7 +435,7 @@
 }
 
 .merchCta {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -527,20 +527,186 @@
   margin-top: 12px;
 }
 
-/* ── RESPONSIVE ───────────────────────────────────── */
+/* ─────────────────────────────────────────────────────
+   MOBILE — full redesign for iPhone
+   Target: 390px wide (iPhone 14/15 standard)
+   All desktop layout assumptions are reset here.
+───────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .heroTitle { left: 24px; bottom: 32px; }
-  .release { right: 24px; bottom: 32px; }
-  .releaseCard { flex-direction: column; align-items: flex-end; }
-  .releaseCoverWrap { width: 70px; height: 70px; }
-  .releaseCover { width: 70px; height: 70px; }
-  .releaseTrack { font-size: 16px; }
-  .section { padding: 64px 24px; margin-left: 0; }
-  .emailSection { padding: 80px 24px; margin-left: 0; }
-  .emailGallery { grid-template-columns: repeat(2, 1fr); }
-  .izzyWrap { height: clamp(4rem, 14vw, 12rem); }
-  .merchScroll { justify-content: flex-start; gap: 32px; }
-  .merchItem { width: 200px; }
-  .merchShirt { height: 260px; }
-  .photoBreak { height: 380px; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100svh; /* svh = safe viewport height, accounts for iOS browser chrome */
+    padding-bottom: 0;
+    align-items: flex-end;
+  }
+
+  .heroBg {
+    object-position: 60% center;
+  }
+
+  /* Title anchored to left edge with generous padding */
+  .heroTitle {
+    left: 24px;
+    bottom: 180px; /* leaves room for the now-playing bar below */
+    line-height: 0.85;
+  }
+
+  .t1 {
+    font-size: clamp(4.5rem, 22vw, 6rem);
+  }
+
+  /* Izzy glitch — same size as Dizzy */
+  .izzyWrap {
+    height: clamp(3.8rem, 22vw, 6rem);
+    margin-left: 0;
+  }
+
+  .izzy1, .izzy2, .izzy3 {
+    font-size: clamp(4.5rem, 22vw, 6rem);
+  }
+
+  /* ── RELEASE CARD — slim now-playing bar pinned to bottom ── */
+  /* On mobile the card sits at the very bottom of the hero as a full-width bar */
+  .release {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+  }
+
+  .releaseLabel {
+    display: none; /* hidden on mobile — card speaks for itself */
+  }
+
+  .releaseCard {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    border-radius: 0;
+    width: 100%;
+  }
+
+  /* Smaller square cover art */
+  .releaseCoverWrap {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+  }
+
+  .coverGlow {
+    inset: -6px;
+  }
+
+  .releaseCover {
+    width: 52px;
+    height: 52px;
+  }
+
+  /* Info takes up remaining space */
+  .releaseInfo {
+    flex: 1;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .nowPlaying {
+    margin-bottom: 1px;
+  }
+
+  .nowPlayingText {
+    font-size: 8px;
+  }
+
+  .releaseTrack {
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .releaseArtist {
+    font-size: 9px;
+  }
+
+  /* Streaming buttons — icon only on mobile to save space */
+  .streamIcons {
+    flex-direction: row;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .streamBtn {
+    padding: 6px 10px;
+    font-size: 8px;
+    gap: 5px;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 64px 24px;
+    margin-left: 0;
+  }
+
+  /* ── PHOTO BREAK ── */
+  .photoBreak {
+    height: 300px;
+  }
+
+  /* ── MERCH ── */
+  .merchScroll {
+    justify-content: flex-start;
+    gap: 16px;
+    /* Left padding so first card doesn't hug edge, right padding shows peek of next card */
+    padding-left: 24px;
+    padding-right: 24px;
+    margin-left: -24px;
+    margin-right: -24px;
+    /* Snap scrolling — feels native on iOS */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    align-items: flex-start; /* remove stagger on mobile — cleaner for snap scroll */
+  }
+
+  .merchItem {
+    width: 72vw; /* ~280px on iPhone 14 — 2 peek slightly into view */
+    max-width: 300px;
+    scroll-snap-align: start;
+    /* Remove stagger offset on mobile */
+    margin-bottom: 0 !important;
+  }
+
+  .merchShirt {
+    height: 280px;
+  }
+
+  .merchItemLabel {
+    font-size: 11px;
+  }
+
+  .merchItemPrice {
+    font-size: 11px;
+  }
+
+  /* ── EMAIL ── */
+  .emailSection {
+    padding: 80px 24px;
+    margin-left: 0;
+  }
+
+  .emailGallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .emailInputWrap {
+    max-width: 100%;
+  }
+
 }
