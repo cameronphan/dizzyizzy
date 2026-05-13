@@ -1,18 +1,14 @@
 import s from './Marquee.module.css';
 
 const items = [
-  'Dark Eyes',
-  'Take Me On',
-  'Hypnotized',
-  'All Through The Night',
-  'Deep Inside',
-  'Win The Prize',
-  'Lure Me In',
-  'Dizzy Izzy',
-  'Out Now',
-  'Follow Me',
-  'Slipped Away',
   'Those Dark Eyes',
+  'Take Me On',
+  "I'm Hypnotized",
+  'Lure Me In',
+  'To Win The Prize',
+  'Follow Me',
+  'All Through The Night',
+  'Prisoner To',
 ];
 
 export default function Marquee() {
