@@ -5,11 +5,11 @@ import { usePathname } from 'next/navigation';
 import { SpotifyIcon, AppleMusicIcon, InstagramIcon, YoutubeIcon } from './Icons';
 import s from './Sidebar.module.css';
 
+// Nav items — About removed
 const nav = [
   { href: '/',        label: 'Home',    sectionId: null      },
   { href: '/#shows',  label: 'Shows',   sectionId: 'shows'   },
   { href: '/#merch',  label: 'Merch',   sectionId: 'merch'   },
-  { href: '/about',   label: 'About',   sectionId: null      },
   { href: '/contact', label: 'Contact', sectionId: null      },
 ];
 

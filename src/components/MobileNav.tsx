@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { SpotifyIcon, AppleMusicIcon, InstagramIcon, YoutubeIcon } from './Icons';
 import s from './MobileNav.module.css';
 
+// Nav items — About removed
 const nav = [
   { href: '/#shows', label: 'Shows'  },
   { href: '/#merch', label: 'Merch'  },
-  { href: '/about',  label: 'About'  },
   { href: '/contact',label: 'Contact'},
 ];
 
