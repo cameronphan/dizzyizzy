@@ -556,12 +556,16 @@
     object-position: center 30%;
   }
 
-  /* Title sits lower third of screen, clear of subject's face */
+  /* Title centered horizontally, lower third of screen */
+  /* Centered horizontally on mobile */
   .heroTitle {
-    left: 24px;
+    left: 0;
+    right: 0;
     bottom: 110px;
     line-height: 0.85;
     overflow: visible;
+    align-items: center;
+    text-align: center;
   }
 
   /* Both Dizzy and Izzy same size — fill ~90% of screen width */
