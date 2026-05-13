@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import s from './AnimatedGrain.module.css';
 
 interface Props {
-  opacity?: number; // 0–1, default 0.055 — subtle but visible
+  opacity?: number; // 0–1, default 0.018 — very subtle animated layer
   fps?: number;     // frames per second the grain refreshes, default 12 (film-like)
 }
 
@@ -12,9 +12,10 @@ interface Props {
  * Renders a full-screen canvas fixed behind all content.
  * Draws new random noise every frame at a controlled FPS,
  * creating the "living film grain / old TV static" effect.
- * Keep opacity low (0.04–0.08) so it reads as texture, not distraction.
+ * Grain is drawn at 2x pixel density for a finer, high-resolution texture.
+ * Keep opacity low (0.01–0.03) so it reads as texture, not distraction.
  */
-export default function AnimatedGrain({ opacity = 0.055, fps = 12 }: Props) {
+export default function AnimatedGrain({ opacity = 0.018, fps = 12 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -28,10 +29,13 @@ export default function AnimatedGrain({ opacity = 0.055, fps = 12 }: Props) {
     let lastTime = 0;
     const interval = 1000 / fps;
 
-    // Resize canvas to fill the viewport
+    // Resize canvas to fill viewport at 2x density for finer grain
     const resize = () => {
-      canvas.width  = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width  = window.innerWidth  * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width  = window.innerWidth  + 'px';
+      canvas.style.height = window.innerHeight + 'px';
     };
     resize();
     window.addEventListener('resize', resize);

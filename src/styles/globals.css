@@ -53,15 +53,17 @@ body::before {
   background: linear-gradient(to top, rgba(4,3,10,0.75) 0%, rgba(4,3,10,0.35) 50%, transparent 100%);
 }
 
-/* GRAIN — heavy, filmic, screen blend */
+/* GRAIN — fine, filmic, screen blend.
+   baseFrequency raised to 1.8 for much finer/smaller grain particles.
+   opacity kept low so it adds texture without muddying the image. */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9998;
-  opacity: 0.14;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
   mix-blend-mode: screen;
 }
 
