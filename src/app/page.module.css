@@ -366,7 +366,7 @@
 
 .merchItem {
   flex-shrink: 0;
-  width: 200px;
+  width: 260px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -390,7 +390,7 @@
 
 .merchShirt {
   width: 100%;
-  height: 260px;
+  height: 320px;
   display: block;
   position: relative;
   transition: transform 0.4s ease;
@@ -412,19 +412,21 @@
   filter: brightness(0.7) contrast(1.08) saturate(0.9) !important;
 }
 
+/* Larger, more readable label text */
 .merchItemLabel {
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--faint);
+  color: var(--muted);
   text-align: center;
   transition: color 0.3s;
 }
-.merchItem:hover .merchItemLabel { color: var(--purple); }
+.merchItem:hover .merchItemLabel { color: var(--cream); }
 
+/* Larger, more readable price/status text */
 .merchItemPrice {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 300;
   letter-spacing: 0.1em;
   color: var(--very-faint);
@@ -538,5 +540,7 @@
   .emailGallery { grid-template-columns: repeat(2, 1fr); }
   .izzyWrap { height: clamp(4rem, 14vw, 12rem); }
   .merchScroll { justify-content: flex-start; gap: 32px; }
+  .merchItem { width: 200px; }
+  .merchShirt { height: 260px; }
   .photoBreak { height: 380px; }
 }
