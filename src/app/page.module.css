@@ -739,11 +739,6 @@
     margin-left: 0;
   }
 
-  /* Give ticket widget lots of room on mobile to load */
-  .ticketWrap {
-    min-height: 600px;
-  }
-
   /* ── PHOTO BREAK ── */
   .photoBreak { height: 300px; }
 
