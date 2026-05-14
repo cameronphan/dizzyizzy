@@ -628,7 +628,7 @@
   /* ── RELEASE — floating centered widget over hero bottom ── */
   .release {
     position: absolute;
-    bottom: -30px;
+    bottom: -25px;
     left: 16px;
     right: 16px;
     align-items: center;
