@@ -575,10 +575,9 @@
     overflow: visible;
   }
 
-  /* Shift image so subject fills the frame better —
-     center 30% shows more of the upper body, less dead sky */
+  /* Position image so head appears above the DIZZY IZZY text */
   .heroBg {
-    object-position: center 30%;
+    object-position: center 15%;
   }
 
   /* Title centered horizontally, lower third of screen */
