@@ -156,6 +156,7 @@
 }
 
 .releaseLabel {
+  display: none;
   font-family: var(--font-body);
   font-size: 7px;
   font-weight: 500;
