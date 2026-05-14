@@ -736,6 +736,8 @@
   .section {
     padding: 64px 24px;
     margin-left: 0;
+    position: relative;
+    z-index: 10;
   }
 
   /* ── PHOTO BREAK ── */
