@@ -37,3 +37,10 @@
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+
+/* On mobile, add top margin so marquee clears the release block */
+@media (max-width: 768px) {
+  .wrap {
+    margin-top: 80px;
+  }
+}

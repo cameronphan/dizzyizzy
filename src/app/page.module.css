@@ -570,7 +570,7 @@
   /* ── HERO ── */
   .hero {
     min-height: 100svh;
-    padding-bottom: 60px;
+    padding-bottom: 0;
     align-items: flex-end;
     overflow: visible;
   }
