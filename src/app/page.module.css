@@ -577,9 +577,9 @@
 
   /* iOS Safari ignores negative object-position values, so we use
      transform: translateY to physically shift the image upward instead.
-     Adjust the percentage to control how high the subject appears. */
+     -6% = 75% of the original -8% shift, per design preference. */
   .heroBg {
-    transform: translateY(-8%);
+    transform: translateY(-6%);
   }
 
   /* Title centered horizontally, sits above the release card with breathing room */
