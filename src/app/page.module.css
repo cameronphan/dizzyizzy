@@ -583,7 +583,7 @@
   .heroTitle {
     left: 0;
     right: 0;
-    bottom: 300px;
+    bottom: 280px;
     line-height: 0.85;
     overflow: visible;
     display: flex;
@@ -634,6 +634,7 @@
     align-items: center;
     gap: 16px;
     padding: 0;
+    padding-top: 24px;
     animation: none;
   }
 
