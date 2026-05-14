@@ -558,7 +558,14 @@
 /* ── PAGE WRAPPER — prevents horizontal overflow on mobile ── */
 .pageWrap {
   width: 100%;
-  overflow-x: hidden;
+  /* Note: overflow-x:hidden moved to media query only — causes Ticket Tailor
+     widget iframe to disappear if applied globally */
+}
+
+@media (max-width: 768px) {
+  .pageWrap {
+    overflow-x: clip; /* clip instead of hidden — allows iframes to render correctly */
+  }
 }
 
 /* ─────────────────────────────────────────────────────
