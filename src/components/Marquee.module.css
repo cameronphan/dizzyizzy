@@ -7,6 +7,24 @@
   white-space: nowrap;
   margin-top: 0;
   margin-bottom: 0;
+  /* Position relative so the ::before gradient pseudo-element can sit above it */
+  position: relative;
+}
+
+/* Gradient bridge — sits above the marquee on mobile only (see media query below).
+   Fades from the hero background color down to transparent so the hero image
+   bleeds seamlessly into the marquee strip with no hard gap. */
+.wrap::before {
+  content: '';
+  display: none; /* hidden on desktop — only shown on mobile */
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(8,5,14,0.85) 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .track {
@@ -38,9 +56,15 @@
   to   { transform: translateX(-50%); }
 }
 
-/* On mobile, add top margin so marquee clears the release block */
+/* On mobile: reduce gap above marquee and enable the gradient bridge */
 @media (max-width: 768px) {
   .wrap {
-    margin-top: 80px;
+    /* Reduced from 80px — 30% less gap between hero bottom and marquee */
+    margin-top: 56px;
+  }
+
+  /* Enable the gradient bridge on mobile only */
+  .wrap::before {
+    display: block;
   }
 }

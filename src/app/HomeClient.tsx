@@ -153,7 +153,8 @@ export default function HomeClient() {
                 <span className={s.nowPlayingText}>Now Playing</span>
               </div>
               <span className={s.releaseTrack}>Dark Eyes</span>
-              <span className={s.releaseArtist}>Dizzy Izzy</span>
+              {/* Changed from "Dizzy Izzy" to describe the release type */}
+              <span className={s.releaseArtist}>Latest Single Release</span>
               <div className={s.streamIcons}>
                 <a
                   href="https://open.spotify.com/artist/0zivcUeYnXj4nR0jl8735K"
