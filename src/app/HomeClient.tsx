@@ -28,15 +28,14 @@ export default function HomeClient() {
 
       {/* ── 1. HERO ── */}
       <section className={s.hero}>
-        {/* Use cropped version on mobile, full version on desktop */}
         <Image
-          src={heroImgPos === '50% 10%' ? '/photos/PP-2-Shrunk-Legs.png' : '/photos/PP-2-Shrunk-Legs-mobile.png'}
+          src="/photos/PP-2-Shrunk-Legs.png"
           alt="Dizzy Izzy"
           fill
           priority
           className={s.heroBg}
           sizes="100vw"
-          style={{ objectPosition: heroImgPos === '50% 10%' ? '50% 10%' : '50% 50%' }}
+          style={{ objectPosition: heroImgPos }}
         />
         <div className={s.heroColorGrade} />
         <div className={s.heroVignette} />
