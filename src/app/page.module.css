@@ -577,7 +577,7 @@
 
   /* Position image so head appears above the DIZZY IZZY text */
   .heroBg {
-    object-position: center 15%;
+    object-position: center 5%;
   }
 
   /* Title centered horizontally, lower third of screen */
@@ -742,28 +742,46 @@
   /* ── PHOTO BREAK ── */
   .photoBreak { height: 300px; }
 
-  /* ── MERCH — snap scroll, starts at first card ── */
+  /* ── MERCH — transparent cards, centered snap scroll ── */
   .merchScroll {
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 16px;
-    padding-left: 24px;
-    padding-right: 24px;
+    gap: 0;
+    /* Side padding = (100vw - cardWidth) / 2 so first and last cards center */
+    padding-left: calc(50vw - 140px);
+    padding-right: calc(50vw - 140px);
     margin-left: -24px;
     margin-right: -24px;
     scroll-snap-type: x mandatory;
-    scroll-padding-left: 24px;
+    scroll-padding-left: calc(50vw - 140px);
   }
 
   .merchItem {
-    width: 75vw;
-    max-width: 290px;
-    scroll-snap-align: start;
+    width: 280px;
+    scroll-snap-align: center;
     margin-bottom: 0 !important;
     flex-shrink: 0;
+    padding: 0 12px;
   }
 
-  .merchShirt { height: 280px; width: 100%; }
+  /* Remove card background on mobile — fully transparent */
+  .merchShirt {
+    height: 280px;
+    width: 100%;
+    background: transparent;
+  }
+
+  /* Remove the purple tint overlay on mobile */
+  .merchShirt::after {
+    display: none;
+  }
+
+  /* Brighter image on transparent bg — no dark blend */
+  .merchShirt img {
+    mix-blend-mode: normal !important;
+    filter: brightness(0.95) contrast(1.02) saturate(0.95) !important;
+  }
+
   .merchItemLabel { font-size: 11px; margin-top: 4px; }
   .merchItemPrice { font-size: 11px; margin-top: 2px; }
 
