@@ -569,7 +569,7 @@
 
   /* ── HERO ── */
   .hero {
-    min-height: 100svh;
+    min-height: 125svh;
     padding-bottom: 0;
     align-items: flex-end;
     overflow: visible;
@@ -583,7 +583,7 @@
   .heroTitle {
     left: 0;
     right: 0;
-    bottom: 320px;
+    bottom: 240px;
     line-height: 0.85;
     overflow: visible;
     display: flex;
