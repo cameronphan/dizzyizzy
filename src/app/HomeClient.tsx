@@ -3,10 +3,24 @@ import Image from 'next/image';
 import Marquee from '@/components/Marquee';
 import Footer from '@/components/Footer';
 import { useReveal } from '@/hooks/useReveal';
+import { useState, useEffect } from 'react';
 import s from './page.module.css';
 
 export default function HomeClient() {
   const revealRef = useReveal();
+
+  // Dynamically set hero image position based on screen width.
+  // CSS media queries can't override Next.js Image inline styles,
+  // so we detect mobile in JS and apply the correct position directly.
+  const [heroImgPos, setHeroImgPos] = useState('50% 10%');
+  useEffect(() => {
+    const update = () => {
+      setHeroImgPos(window.innerWidth <= 768 ? '50% 5%' : '50% 10%');
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
 
   return (
     /* pageWrap prevents horizontal overflow on mobile */
@@ -21,7 +35,7 @@ export default function HomeClient() {
           priority
           className={s.heroBg}
           sizes="100vw"
-          style={{ objectPosition: 'var(--hero-img-pos, 50% 10%)' }}
+          style={{ objectPosition: heroImgPos }}
         />
         <div className={s.heroColorGrade} />
         <div className={s.heroVignette} />
