@@ -571,7 +571,7 @@
     min-height: 100svh;
     padding-bottom: 0;
     align-items: flex-end;
-    overflow: visible;
+    overflow: hidden;
   }
 
   /* object-position is controlled via --hero-img-pos CSS variable in globals.css
@@ -627,7 +627,7 @@
   /* ── RELEASE — floating centered widget over hero bottom ── */
   .release {
     position: absolute;
-    bottom: 20px;
+    bottom: 12px;
     left: 16px;
     right: 16px;
     align-items: center;
@@ -735,14 +735,6 @@
   .section {
     padding: 64px 24px;
     margin-left: 0;
-  }
-
-  /* Explicitly ensure ticket widget is visible on mobile */
-  .ticketWrap {
-    min-height: 300px;
-    overflow: visible;
-    position: relative;
-    z-index: 1;
   }
 
   /* ── PHOTO BREAK ── */
