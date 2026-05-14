@@ -536,22 +536,23 @@
 
 /* Mobile vhs keyframes — translateX values reduced so glitch
    stays within the centered container without drifting off screen */
+/* Mobile vhs — translateX is relative to the left:50% anchor point */
 @keyframes vhs1mobile {
-  0%   { -webkit-text-stroke: 1px rgba(0,255,255,0.6);   transform: translateX(-2px); opacity: 0.5; }
-  20%  { -webkit-text-stroke: 1px rgba(0,255,120,0.65);  transform: translateX(-3px); opacity: 0.7; }
-  40%  { -webkit-text-stroke: 1px rgba(255,255,0,0.5);   transform: translateX(-2px); opacity: 0.4; }
-  60%  { -webkit-text-stroke: 1px rgba(0,200,255,0.6);   transform: translateX(-3px); opacity: 0.65; }
-  80%  { -webkit-text-stroke: 1px rgba(100,255,200,0.5); transform: translateX(-2px); opacity: 0.5; }
-  100% { -webkit-text-stroke: 1px rgba(0,255,255,0.6);   transform: translateX(-2px); opacity: 0.5; }
+  0%   { -webkit-text-stroke: 1px rgba(0,255,255,0.6);   transform: translateX(calc(-50% - 2px)); opacity: 0.5; }
+  20%  { -webkit-text-stroke: 1px rgba(0,255,120,0.65);  transform: translateX(calc(-50% - 3px)); opacity: 0.7; }
+  40%  { -webkit-text-stroke: 1px rgba(255,255,0,0.5);   transform: translateX(calc(-50% - 2px)); opacity: 0.4; }
+  60%  { -webkit-text-stroke: 1px rgba(0,200,255,0.6);   transform: translateX(calc(-50% - 3px)); opacity: 0.65; }
+  80%  { -webkit-text-stroke: 1px rgba(100,255,200,0.5); transform: translateX(calc(-50% - 2px)); opacity: 0.5; }
+  100% { -webkit-text-stroke: 1px rgba(0,255,255,0.6);   transform: translateX(calc(-50% - 2px)); opacity: 0.5; }
 }
 
 @keyframes vhs2mobile {
-  0%   { -webkit-text-stroke: 1px rgba(255,0,200,0.5);   transform: translateX(2px); opacity: 0.4; }
-  20%  { -webkit-text-stroke: 1px rgba(255,50,50,0.55);  transform: translateX(2px); opacity: 0.55; }
-  40%  { -webkit-text-stroke: 1px rgba(255,100,0,0.5);   transform: translateX(3px); opacity: 0.6; }
-  60%  { -webkit-text-stroke: 1px rgba(200,0,255,0.55);  transform: translateX(2px); opacity: 0.4; }
-  80%  { -webkit-text-stroke: 1px rgba(255,0,150,0.5);   transform: translateX(3px); opacity: 0.5; }
-  100% { -webkit-text-stroke: 1px rgba(255,0,200,0.5);   transform: translateX(2px); opacity: 0.4; }
+  0%   { -webkit-text-stroke: 1px rgba(255,0,200,0.5);   transform: translateX(calc(-50% + 2px)); opacity: 0.4; }
+  20%  { -webkit-text-stroke: 1px rgba(255,50,50,0.55);  transform: translateX(calc(-50% + 2px)); opacity: 0.55; }
+  40%  { -webkit-text-stroke: 1px rgba(255,100,0,0.5);   transform: translateX(calc(-50% + 3px)); opacity: 0.6; }
+  60%  { -webkit-text-stroke: 1px rgba(200,0,255,0.55);  transform: translateX(calc(-50% + 2px)); opacity: 0.4; }
+  80%  { -webkit-text-stroke: 1px rgba(255,0,150,0.5);   transform: translateX(calc(-50% + 3px)); opacity: 0.5; }
+  100% { -webkit-text-stroke: 1px rgba(255,0,200,0.5);   transform: translateX(calc(-50% + 2px)); opacity: 0.4; }
 }
 
 /* ── PAGE WRAPPER — prevents horizontal overflow on mobile ── */
@@ -585,38 +586,45 @@
   .heroTitle {
     left: 0;
     right: 0;
-    bottom: 260px;
+    bottom: 280px;
     line-height: 0.85;
     overflow: visible;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    width: 100%;
   }
 
   /* Both Dizzy and Izzy same size — fill ~90% of screen width */
   .t1 {
     font-size: clamp(4.8rem, 23vw, 6.5rem);
+    text-align: center;
+    width: 100%;
+    display: block;
   }
 
-  /* izzyWrap height must match t1 font size exactly — no margin so it stays centered */
+  /* izzyWrap — centered, matches t1 size exactly */
   .izzyWrap {
     height: clamp(4.8rem, 23vw, 6.5rem);
+    width: 100%;
     margin-left: 0;
     margin-right: 0;
     overflow: visible;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
   }
 
-  /* All three glitch layers same size as Dizzy */
+  /* All three glitch layers — positioned from center of wrap */
   .izzy1, .izzy2, .izzy3 {
     font-size: clamp(4.8rem, 23vw, 6.5rem);
-    left: 0;
-    transform: none;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
   }
 
-  /* Override vhs1/vhs2 transforms to stay centered */
+  /* Override vhs1/vhs2 — use mobile keyframes that offset from center */
   .izzy1 { animation: vhs1mobile 3.2s ease-in-out infinite; }
   .izzy2 { animation: vhs2mobile 3.2s ease-in-out infinite; }
 
@@ -640,31 +648,32 @@
     text-align: center;
   }
 
-  /* Floating card — centered column layout */
+  /* Floating card — very transparent, centered column */
   .releaseCard {
     flex-direction: column;
     align-items: center;
     gap: 12px;
     padding: 20px 24px;
-    border: 1px solid rgba(155,109,255,0.25);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 4px;
     width: 100%;
     text-align: center;
-    background: rgba(8,5,14,0.72);
+    background: rgba(8,5,14,0.28);
+    backdrop-filter: blur(24px);
   }
 
-  /* Larger cover art — more visual impact */
+  /* Larger cover art */
   .releaseCoverWrap {
-    width: 80px;
-    height: 80px;
+    width: 110px;
+    height: 110px;
     flex-shrink: 0;
   }
 
-  .coverGlow { inset: -8px; }
+  .coverGlow { inset: -10px; }
 
   .releaseCover {
-    width: 80px;
-    height: 80px;
+    width: 110px;
+    height: 110px;
   }
 
   .releaseInfo {
@@ -694,7 +703,7 @@
     text-align: center;
   }
 
-  /* Stream buttons — side by side, full width */
+  /* Stream buttons — full width, brand colors */
   .streamIcons {
     gap: 8px;
     margin-top: 8px;
@@ -702,12 +711,28 @@
     justify-content: center;
   }
 
+  /* Base stream button reset for mobile brand colors */
   .streamBtn {
     flex: 1;
     justify-content: center;
-    padding: 10px 14px;
+    padding: 11px 14px;
     font-size: 9px;
     gap: 6px;
+    border: none;
+  }
+
+  /* Spotify — brand green */
+  .streamBtn:first-child {
+    background: #1DB954;
+    color: #000;
+    border: none;
+  }
+
+  /* Apple Music — brand red/pink gradient */
+  .streamBtn:last-child {
+    background: linear-gradient(135deg, #fc3c44, #f94c57);
+    color: #fff;
+    border: none;
   }
 
   /* ── SECTIONS ── */
