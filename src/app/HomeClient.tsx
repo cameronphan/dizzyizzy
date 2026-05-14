@@ -15,7 +15,7 @@ export default function HomeClient() {
   const [heroImgPos, setHeroImgPos] = useState('50% 10%');
   useEffect(() => {
     const update = () => {
-      setHeroImgPos(window.innerWidth <= 768 ? '60% 20%' : '50% 10%');
+      setHeroImgPos(window.innerWidth <= 768 ? '60% 0%' : '50% 10%');
     };
     update();
     window.addEventListener('resize', update);
