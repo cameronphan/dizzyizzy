@@ -117,7 +117,7 @@ export default function HomeClient() {
       <section className={s.section} id="shows">
         <span className="eyebrow reveal" data-delay="0">Live</span>
         <h2 className="sec-title reveal" data-delay="80">Shows</h2>
-        <div className={`${s.ticketWrap} reveal`} data-delay="160">
+        <div className={s.ticketWrap}>
           <div dangerouslySetInnerHTML={{ __html: `
             <div class="tt-widget">
               <div class="tt-widget-fallback">
