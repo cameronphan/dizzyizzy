@@ -1,11 +1,17 @@
+/* Wrap hidden on desktop, shown on mobile */
 .wrap { display:none; position:fixed; top:0; left:0; right:0; z-index:200; }
-.bar { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; background:rgba(8,5,14,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+
+/* Bar — more transparent so it feels part of the page, not a hard header */
+.bar { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; background:rgba(8,5,14,0.45); backdrop-filter:blur(20px); border-bottom:1px solid rgba(255,255,255,0.04); }
+
 .logo { font-family:var(--font-display); font-weight:700; font-size:16px; letter-spacing:0.05em; text-transform:uppercase; color:var(--cream); }
 .burger { display:flex; flex-direction:column; gap:5px; background:none; border:none; padding:4px; }
 .b { display:block; width:20px; height:1px; background:var(--cream); transition:transform 0.25s,opacity 0.25s; }
 .b1 { transform:translateY(6px) rotate(45deg); }
 .b2 { opacity:0; }
 .b3 { transform:translateY(-6px) rotate(-45deg); }
+
+/* Menu — solid when open so links are readable */
 .menu { display:flex; flex-direction:column; background:rgba(8,5,14,0.98); border-bottom:1px solid var(--border); padding:1rem 24px; }
 .link { font-size:13px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding:0.9rem 0; border-bottom:1px solid var(--border); transition:color 0.2s; }
 .link:hover { color:var(--purple); }
@@ -13,4 +19,5 @@
 .icon { display:block; color:var(--faint); transition:color 0.2s; width:22px; height:22px; }
 .icon:hover { color:var(--purple); }
 .icon svg { width:22px; height:22px; }
+
 @media (max-width:768px) { .wrap { display:block; } }
