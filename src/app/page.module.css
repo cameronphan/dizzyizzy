@@ -648,18 +648,18 @@
     text-align: center;
   }
 
-  /* Floating card — very transparent, centered column */
+  /* Floating card — fully transparent with just a blur behind it */
   .releaseCard {
     flex-direction: column;
     align-items: center;
     gap: 12px;
     padding: 20px 24px;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: none;
     border-radius: 4px;
     width: 100%;
     text-align: center;
-    background: rgba(8,5,14,0.28);
-    backdrop-filter: blur(24px);
+    background: transparent;
+    backdrop-filter: blur(0px);
   }
 
   /* Larger cover art */
