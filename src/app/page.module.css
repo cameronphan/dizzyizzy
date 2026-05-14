@@ -586,7 +586,7 @@
   .heroTitle {
     left: 0;
     right: 0;
-    bottom: 280px;
+    bottom: 320px;
     line-height: 0.85;
     overflow: visible;
     display: flex;
@@ -631,22 +631,17 @@
   /* ── RELEASE — floating centered widget over hero bottom ── */
   .release {
     position: absolute;
-    bottom: 32px;
-    left: 24px;
-    right: 24px;
+    bottom: 24px;
+    left: 16px;
+    right: 16px;
     align-items: center;
     gap: 16px;
     padding: 0;
     animation: none;
   }
 
-  .releaseLabel {
-    display: block;
-    font-size: 8px;
-    letter-spacing: 0.25em;
-    color: rgba(237,232,245,0.45);
-    text-align: center;
-  }
+  /* Hidden — redundant on mobile */
+  .releaseLabel { display: none; }
 
   /* Floating card — fully transparent with just a blur behind it */
   .releaseCard {
@@ -662,18 +657,20 @@
     backdrop-filter: blur(0px);
   }
 
-  /* Larger cover art */
+  /* Larger cover art with shadow glow */
   .releaseCoverWrap {
-    width: 110px;
-    height: 110px;
+    width: 150px;
+    height: 150px;
     flex-shrink: 0;
+    filter: drop-shadow(0 0 28px rgba(155,109,255,0.7)) drop-shadow(0 8px 24px rgba(0,0,0,0.8));
   }
 
-  .coverGlow { inset: -10px; }
+  .coverGlow { inset: -14px; }
 
   .releaseCover {
-    width: 110px;
-    height: 110px;
+    width: 150px;
+    height: 150px;
+    border-radius: 3px;
   }
 
   .releaseInfo {
@@ -703,22 +700,24 @@
     text-align: center;
   }
 
-  /* Stream buttons — full width, brand colors */
+  /* Stream buttons — pill shape, brand colors */
   .streamIcons {
-    gap: 8px;
-    margin-top: 8px;
+    gap: 10px;
+    margin-top: 10px;
     width: 100%;
     justify-content: center;
   }
 
-  /* Base stream button reset for mobile brand colors */
   .streamBtn {
     flex: 1;
     justify-content: center;
-    padding: 11px 14px;
+    padding: 10px 14px;
     font-size: 9px;
+    font-weight: 600;
     gap: 6px;
     border: none;
+    border-radius: 50px;
+    letter-spacing: 0.12em;
   }
 
   /* Spotify — brand green */
@@ -728,7 +727,7 @@
     border: none;
   }
 
-  /* Apple Music — brand red/pink gradient */
+  /* Apple Music — brand gradient */
   .streamBtn:last-child {
     background: linear-gradient(135deg, #fc3c44, #f94c57);
     color: #fff;
