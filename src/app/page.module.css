@@ -583,7 +583,7 @@
   .heroTitle {
     left: 0;
     right: 0;
-    bottom: 250px;
+    bottom: 430px;
     line-height: 0.85;
     overflow: visible;
     display: flex;
@@ -660,7 +660,7 @@
     width: 150px;
     height: 150px;
     flex-shrink: 0;
-    margin-top: 40px;
+    margin-top: 0;
     filter: drop-shadow(0 0 28px rgba(155,109,255,0.7)) drop-shadow(0 8px 24px rgba(0,0,0,0.8));
   }
 
