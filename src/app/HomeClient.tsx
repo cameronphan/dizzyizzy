@@ -1,12 +1,83 @@
 'use client';
 import Image from 'next/image';
-import Script from 'next/script';
 import Marquee from '@/components/Marquee';
 import Footer from '@/components/Footer';
 import { useReveal } from '@/hooks/useReveal';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import s from './page.module.css';
 
+// ── Ticket Tailor Widget URL ──────────────────────────────────────────────────
+// Centralised here so it's easy to update if the Ticket Tailor account changes.
+const TT_WIDGET_URL =
+  'https://www.tickettailor.com/all-tickets-by-event/cameronphanmusic/?ref=website_widget&show_search_filter=true&show_date_filter=true&show_sort=true';
+
+// ── TicketWidget component ────────────────────────────────────────────────────
+// Isolated component that handles its own script injection lifecycle.
+// Using a ref + useEffect guarantees the container div exists in the DOM
+// before the script runs — this is the most reliable pattern for widgets
+// that scan the page for a mount point on load.
+function TicketWidget() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    // Remove any previously injected script (handles React strict-mode double mount)
+    const existing = container.querySelector('script[data-tt-widget]');
+    if (existing) existing.remove();
+
+    // Build and inject the script tag directly into the widget container.
+    // Ticket Tailor's widget.js reads data-* attributes from the script tag
+    // itself, so the script must live inside (or adjacent to) the .tt-widget div.
+    const script = document.createElement('script');
+    script.src = 'https://cdn.tickettailor.com/js/widgets/min/widget.js';
+    script.setAttribute('data-tt-widget', 'true'); // marker for cleanup above
+    script.setAttribute('data-url', TT_WIDGET_URL);
+    script.setAttribute('data-type', 'inline');
+    script.setAttribute('data-inline-minimal', 'false');
+    script.setAttribute('data-inline-show-logo', 'false');
+    script.setAttribute('data-inline-bg-fill', 'false');
+    script.setAttribute('data-inline-inherit-ref-from-url-param', '');
+    script.setAttribute('data-inline-ref', 'website_widget');
+    script.async = true;
+
+    container.appendChild(script);
+
+    // Cleanup on unmount — prevents duplicate widgets if the component re-renders
+    return () => {
+      if (container.contains(script)) container.removeChild(script);
+    };
+  }, []);
+
+  return (
+    /*
+      .tt-widget is the class Ticket Tailor's script looks for.
+      min-height prevents the section from collapsing while the iframe loads,
+      which would push content around and break the layout on mobile.
+    */
+    <div
+      ref={containerRef}
+      className="tt-widget"
+      style={{ minHeight: '300px' }}
+    >
+      {/* Fallback shown only if JS is blocked or the CDN is unreachable */}
+      <div className="tt-widget-fallback">
+        <p>
+          <a
+            href={TT_WIDGET_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Click here to buy tickets
+          </a>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ── HomeClient ────────────────────────────────────────────────────────────────
 export default function HomeClient() {
   const revealRef = useReveal();
 
@@ -120,54 +191,12 @@ export default function HomeClient() {
         <h2 className="sec-title reveal" data-delay="80">Shows</h2>
 
         {/*
-          Ticket Tailor widget container.
-          - The div.tt-widget is the mount point the external script looks for.
-          - min-height ensures the section doesn't collapse before the iframe loads,
-            which is especially important on mobile where async scripts can be slow.
-          - The fallback link inside is shown if JS fails or is blocked.
+          ticketWrap wraps the TicketWidget component.
+          Styling for this wrapper lives in page.module.css (.ticketWrap).
         */}
         <div className={s.ticketWrap}>
-          <div
-            className="tt-widget"
-            style={{ minHeight: '300px' }}
-          >
-            <div className="tt-widget-fallback">
-              <p>
-                <a
-                  href="https://www.tickettailor.com/all-tickets-by-event/cameronphanmusic/?ref=website_widget&show_search_filter=true&show_date_filter=true&show_sort=true"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Click here to buy tickets
-                </a>
-                <br />
-                <small>
-                  <a href="https://www.tickettailor.com?rf=wdg_305090" className="tt-widget-powered">
-                    Sell tickets online with Ticket Tailor
-                  </a>
-                </small>
-              </p>
-            </div>
-          </div>
+          <TicketWidget />
         </div>
-
-        {/*
-          Next.js <Script> component — the correct way to load third-party scripts.
-          strategy="lazyOnload" waits until the page is fully interactive before loading,
-          which avoids blocking the main thread and works reliably on mobile.
-          All required data-* attributes are passed directly as props.
-        */}
-        <Script
-          src="https://cdn.tickettailor.com/js/widgets/min/widget.js"
-          strategy="lazyOnload"
-          data-url="https://www.tickettailor.com/all-tickets-by-event/cameronphanmusic/?ref=website_widget&show_search_filter=true&show_date_filter=true&show_sort=true"
-          data-type="inline"
-          data-inline-minimal="false"
-          data-inline-show-logo="false"
-          data-inline-bg-fill="false"
-          data-inline-inherit-ref-from-url-param=""
-          data-inline-ref="website_widget"
-        />
       </section>
 
       <div className="purple-rule" />
