@@ -555,17 +555,9 @@
   100% { -webkit-text-stroke: 1px rgba(255,0,200,0.5);   transform: translateX(calc(-50% + 2px)); opacity: 0.4; }
 }
 
-/* ── PAGE WRAPPER — prevents horizontal overflow on mobile ── */
+/* ── PAGE WRAPPER ── */
 .pageWrap {
   width: 100%;
-  /* Note: overflow-x:hidden moved to media query only — causes Ticket Tailor
-     widget iframe to disappear if applied globally */
-}
-
-@media (max-width: 768px) {
-  .pageWrap {
-    overflow-x: clip; /* clip instead of hidden — allows iframes to render correctly */
-  }
 }
 
 /* ─────────────────────────────────────────────────────
@@ -635,13 +627,12 @@
   /* ── RELEASE — floating centered widget over hero bottom ── */
   .release {
     position: absolute;
-    bottom: -15px;
+    bottom: 20px;
     left: 16px;
     right: 16px;
     align-items: center;
     gap: 16px;
     padding: 0;
-    padding-top: 0;
     animation: none;
   }
 
@@ -744,6 +735,14 @@
   .section {
     padding: 64px 24px;
     margin-left: 0;
+  }
+
+  /* Explicitly ensure ticket widget is visible on mobile */
+  .ticketWrap {
+    min-height: 300px;
+    overflow: visible;
+    position: relative;
+    z-index: 1;
   }
 
   /* ── PHOTO BREAK ── */
