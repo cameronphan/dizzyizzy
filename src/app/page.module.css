@@ -578,12 +578,13 @@
   /* object-position is controlled via --hero-img-pos CSS variable in globals.css
      and applied via style prop in HomeClient.tsx — can't override Next.js inline styles with CSS alone */
 
-  /* Title centered horizontally, lower third of screen */
-  /* Centered horizontally on mobile — sits above the floating release card */
+  /* Title centered horizontally, sits above the release card with breathing room */
   .heroTitle {
     left: 0;
     right: 0;
-    bottom: 360px;
+    /* bottom: pushed up enough to clear the release card below it.
+       290px = approximate height of release card (260px) + 30px gap buffer */
+    bottom: 290px;
     line-height: 0.85;
     overflow: visible;
     display: flex;
@@ -625,10 +626,12 @@
   .izzy1 { animation: vhs1mobile 3.2s ease-in-out infinite; }
   .izzy2 { animation: vhs2mobile 3.2s ease-in-out infinite; }
 
-  /* ── RELEASE — floating centered widget over hero bottom ── */
+  /* ── RELEASE — floating centered widget over hero bottom ──
+     bottom: 60px gives a natural buffer so the card doesn't
+     sit flush against the screen edge, and clears the title above */
   .release {
     position: absolute;
-    bottom: 12px;
+    bottom: 60px;
     left: 16px;
     right: 16px;
     align-items: center;
