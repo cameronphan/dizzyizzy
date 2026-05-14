@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import Script from 'next/script';
 import Marquee from '@/components/Marquee';
 import Footer from '@/components/Footer';
 import { useReveal } from '@/hooks/useReveal';
@@ -117,20 +118,56 @@ export default function HomeClient() {
       <section className={s.section} id="shows">
         <span className="eyebrow reveal" data-delay="0">Live</span>
         <h2 className="sec-title reveal" data-delay="80">Shows</h2>
+
+        {/*
+          Ticket Tailor widget container.
+          - The div.tt-widget is the mount point the external script looks for.
+          - min-height ensures the section doesn't collapse before the iframe loads,
+            which is especially important on mobile where async scripts can be slow.
+          - The fallback link inside is shown if JS fails or is blocked.
+        */}
         <div className={s.ticketWrap}>
-          <div dangerouslySetInnerHTML={{ __html: `
-            <div class="tt-widget">
-              <div class="tt-widget-fallback">
-                <p><a href="https://www.tickettailor.com/all-tickets-by-event/cameronphanmusic/?ref=website_widget&show_search_filter=true&show_date_filter=true&show_sort=true" target="_blank">Click here to buy tickets</a><br /><small><a href="https://www.tickettailor.com?rf=wdg_305090" class="tt-widget-powered">Sell tickets online with Ticket Tailor</a></small></p>
-              </div>
-              <script src="https://cdn.tickettailor.com/js/widgets/min/widget.js"
-                data-url="https://www.tickettailor.com/all-tickets-by-event/cameronphanmusic/?ref=website_widget&show_search_filter=true&show_date_filter=true&show_sort=true"
-                data-type="inline" data-inline-minimal="false" data-inline-show-logo="false"
-                data-inline-bg-fill="false" data-inline-inherit-ref-from-url-param=""
-                data-inline-ref="website_widget"></script>
+          <div
+            className="tt-widget"
+            style={{ minHeight: '300px' }}
+          >
+            <div className="tt-widget-fallback">
+              <p>
+                <a
+                  href="https://www.tickettailor.com/all-tickets-by-event/cameronphanmusic/?ref=website_widget&show_search_filter=true&show_date_filter=true&show_sort=true"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Click here to buy tickets
+                </a>
+                <br />
+                <small>
+                  <a href="https://www.tickettailor.com?rf=wdg_305090" className="tt-widget-powered">
+                    Sell tickets online with Ticket Tailor
+                  </a>
+                </small>
+              </p>
             </div>
-          `}} />
+          </div>
         </div>
+
+        {/*
+          Next.js <Script> component — the correct way to load third-party scripts.
+          strategy="lazyOnload" waits until the page is fully interactive before loading,
+          which avoids blocking the main thread and works reliably on mobile.
+          All required data-* attributes are passed directly as props.
+        */}
+        <Script
+          src="https://cdn.tickettailor.com/js/widgets/min/widget.js"
+          strategy="lazyOnload"
+          data-url="https://www.tickettailor.com/all-tickets-by-event/cameronphanmusic/?ref=website_widget&show_search_filter=true&show_date_filter=true&show_sort=true"
+          data-type="inline"
+          data-inline-minimal="false"
+          data-inline-show-logo="false"
+          data-inline-bg-fill="false"
+          data-inline-inherit-ref-from-url-param=""
+          data-inline-ref="website_widget"
+        />
       </section>
 
       <div className="purple-rule" />
