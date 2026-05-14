@@ -568,7 +568,8 @@
 
   /* ── HERO ── */
   .hero {
-    min-height: 100svh;
+    height: 100svh;
+    min-height: unset;
     padding-bottom: 0;
     align-items: flex-end;
     overflow: hidden;
