@@ -575,9 +575,9 @@
     overflow: visible;
   }
 
-  /* Position image so head appears above the DIZZY IZZY text */
+  /* Force image position — !important needed to override Next.js Image inline styles */
   .heroBg {
-    object-position: center 5%;
+    object-position: center 5% !important;
   }
 
   /* Title centered horizontally, lower third of screen */
