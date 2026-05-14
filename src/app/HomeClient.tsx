@@ -21,6 +21,7 @@ export default function HomeClient() {
           priority
           className={s.heroBg}
           sizes="100vw"
+          style={{ objectPosition: 'var(--hero-img-pos, 50% 10%)' }}
         />
         <div className={s.heroColorGrade} />
         <div className={s.heroVignette} />
