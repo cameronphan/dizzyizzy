@@ -64,11 +64,7 @@ function TicketWidget() {
       {/* Fallback shown only if JS is blocked or the CDN is unreachable */}
       <div className="tt-widget-fallback">
         <p>
-          <a
-            href={TT_WIDGET_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={TT_WIDGET_URL} target="_blank" rel="noopener noreferrer">
             Click here to buy tickets
           </a>
         </p>
@@ -84,10 +80,12 @@ export default function HomeClient() {
   // Dynamically set hero image position based on screen width.
   // CSS media queries can't override Next.js Image inline styles,
   // so we detect mobile in JS and apply the correct position directly.
+  // object-position on iOS Safari is unreliable for shifting images —
+  // use transform: translateY in CSS instead for mobile vertical offset.
   const [heroImgPos, setHeroImgPos] = useState('50% 10%');
   useEffect(() => {
     const update = () => {
-      setHeroImgPos(window.innerWidth <= 768 ? '60% -15%' : '50% 10%');
+      setHeroImgPos(window.innerWidth <= 768 ? '60% 0%' : '50% 10%');
     };
     update();
     window.addEventListener('resize', update);

@@ -575,9 +575,14 @@
     overflow: hidden;
   }
 
-  /* Title centered horizontally.
-     bottom: 320px pushes it high enough to clear the release card below,
-     giving a visible gap between "IZZY" and the album cover. */
+  /* iOS Safari ignores negative object-position values, so we use
+     transform: translateY to physically shift the image upward instead.
+     Adjust the percentage to control how high the subject appears. */
+  .heroBg {
+    transform: translateY(-8%);
+  }
+
+  /* Title centered horizontally, sits above the release card with breathing room */
   .heroTitle {
     left: 0;
     right: 0;
